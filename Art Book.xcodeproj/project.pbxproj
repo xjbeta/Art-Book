@@ -7,20 +7,82 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0102E9A02161FA7500460577 /* ContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E99F2161FA7500460577 /* ContentViewController.swift */; };
+		0102E9A62162085A00460577 /* Identifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9A52162085A00460577 /* Identifiers.swift */; };
+		0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9A72162274B00460577 /* SidebarOutlineView.swift */; };
+		0102E9B12162502500460577 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9B02162502500460577 /* Preferences.swift */; };
+		0102E9B32162513500460577 /* URLSecurityScope.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9B22162513500460577 /* URLSecurityScope.swift */; };
+		013017E1216C79B30074144B /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0113333F2165B7B200DE7604 /* DevMateKit.framework */; };
+		013017E2216C79B30074144B /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0113333F2165B7B200DE7604 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		013017E7216C89840074144B /* ImageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013017E5216C89840074144B /* ImageItemCell.xib */; };
+		013017E8216C89840074144B /* ImageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013017E6216C89840074144B /* ImageItemCell.swift */; };
+		013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; };
+		013017F2216CE6B10074144B /* CollectionView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		013017F3216CE6BB0074144B /* CollectionView.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 013017EE216CE6A90074144B /* CollectionView.framework.dSYM */; };
+		013B5AB02170E9690042F26D /* Cache.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 013B5AAC2170E9630042F26D /* Cache.framework.dSYM */; };
+		013B5AB22170E9710042F26D /* Cache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 013B5AAD2170E9630042F26D /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		013B5AB421717E2A0042F26D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B5AB321717E2A0042F26D /* ImageCache.swift */; };
+		013B5AB8217205E70042F26D /* SidebarAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B5AB7217205E70042F26D /* SidebarAddButton.swift */; };
+		01473005216099D500F658A6 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01473004216099D500F658A6 /* SidebarViewController.swift */; };
+		0147300721609F8600F658A6 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147300621609F8600F658A6 /* FileNode.swift */; };
+		014730092160A3B800F658A6 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014730082160A3B800F658A6 /* MainWindowController.swift */; };
 		016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3C99216058D1005515E0 /* AppDelegate.swift */; };
-		016A3C9C216058D1005515E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3C9B216058D1005515E0 /* ViewController.swift */; };
 		016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9D216058D2005515E0 /* Assets.xcassets */; };
 		016A3CA1216058D2005515E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9F216058D2005515E0 /* Main.storyboard */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		013017E0216C79AE0074144B /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				013017E2216C79B30074144B /* DevMateKit.framework in Embed Frameworks */,
+				013017F2216CE6B10074144B /* CollectionView.framework in Embed Frameworks */,
+				013B5AB22170E9710042F26D /* Cache.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		014730172160EC9100F658A6 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				013B5AB02170E9690042F26D /* Cache.framework.dSYM in CopyFiles */,
+				013017F3216CE6BB0074144B /* CollectionView.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		0102E99F2161FA7500460577 /* ContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentViewController.swift; sourceTree = "<group>"; };
+		0102E9A52162085A00460577 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
+		0102E9A72162274B00460577 /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
+		0102E9B02162502500460577 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Views/Preferences.swift; sourceTree = "<group>"; };
+		0102E9B22162513500460577 /* URLSecurityScope.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSecurityScope.swift; sourceTree = "<group>"; };
+		0113333F2165B7B200DE7604 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = SOURCE_ROOT; };
+		01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art Book-Bridging-Header.h"; sourceTree = "<group>"; };
+		013017E5216C89840074144B /* ImageItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageItemCell.xib; sourceTree = "<group>"; };
+		013017E6216C89840074144B /* ImageItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageItemCell.swift; sourceTree = "<group>"; };
+		013017ED216CE6A90074144B /* CollectionView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CollectionView.framework; path = Carthage/Build/Mac/CollectionView.framework; sourceTree = SOURCE_ROOT; };
+		013017EE216CE6A90074144B /* CollectionView.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CollectionView.framework.dSYM; path = Carthage/Build/Mac/CollectionView.framework.dSYM; sourceTree = SOURCE_ROOT; };
+		013B5AAC2170E9630042F26D /* Cache.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Cache.framework.dSYM; path = Carthage/Build/Mac/Cache.framework.dSYM; sourceTree = SOURCE_ROOT; };
+		013B5AAD2170E9630042F26D /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/Mac/Cache.framework; sourceTree = SOURCE_ROOT; };
+		013B5AB321717E2A0042F26D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		013B5AB7217205E70042F26D /* SidebarAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarAddButton.swift; sourceTree = "<group>"; };
+		01473004216099D500F658A6 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
+		0147300621609F8600F658A6 /* FileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
+		014730082160A3B800F658A6 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		016A3C96216058D1005515E0 /* Art Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A3C99216058D1005515E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		016A3C9B216058D1005515E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		016A3C9D216058D2005515E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		016A3CA0216058D2005515E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		016A3CA2216058D2005515E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		016A3CA3216058D2005515E0 /* Art_Book.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Art_Book.entitlements; sourceTree = "<group>"; };
+		016A3CA92160592C005515E0 /* Art Book.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Art Book.entitlements"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -28,17 +90,66 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				013017E1216C79B30074144B /* DevMateKit.framework in Frameworks */,
+				013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0102E9A12161FAE200460577 /* Content */ = {
+			isa = PBXGroup;
+			children = (
+				0102E99F2161FA7500460577 /* ContentViewController.swift */,
+				013017E6216C89840074144B /* ImageItemCell.swift */,
+				013017E5216C89840074144B /* ImageItemCell.xib */,
+				013B5AB321717E2A0042F26D /* ImageCache.swift */,
+			);
+			path = Content;
+			sourceTree = "<group>";
+		};
+		0102E9A22161FAF000460577 /* Sidebar */ = {
+			isa = PBXGroup;
+			children = (
+				01473004216099D500F658A6 /* SidebarViewController.swift */,
+				0102E9A72162274B00460577 /* SidebarOutlineView.swift */,
+				013B5AB7217205E70042F26D /* SidebarAddButton.swift */,
+				0147300621609F8600F658A6 /* FileNode.swift */,
+			);
+			path = Sidebar;
+			sourceTree = "<group>";
+		};
+		011333362165B79900DE7604 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				013B5AAD2170E9630042F26D /* Cache.framework */,
+				013B5AAC2170E9630042F26D /* Cache.framework.dSYM */,
+				013017ED216CE6A90074144B /* CollectionView.framework */,
+				013017EE216CE6A90074144B /* CollectionView.framework.dSYM */,
+				0113333F2165B7B200DE7604 /* DevMateKit.framework */,
+			);
+			path = Frameworks;
+			sourceTree = "<group>";
+		};
+		01473003216099B700F658A6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				016A3C9F216058D2005515E0 /* Main.storyboard */,
+				014730082160A3B800F658A6 /* MainWindowController.swift */,
+				0102E9A52162085A00460577 /* Identifiers.swift */,
+				0102E9A22161FAF000460577 /* Sidebar */,
+				0102E9A12161FAE200460577 /* Content */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		016A3C8D216058D1005515E0 = {
 			isa = PBXGroup;
 			children = (
 				016A3C98216058D1005515E0 /* Art Book */,
 				016A3C97216058D1005515E0 /* Products */,
+				011333362165B79900DE7604 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -53,12 +164,14 @@
 		016A3C98216058D1005515E0 /* Art Book */ = {
 			isa = PBXGroup;
 			children = (
-				016A3C99216058D1005515E0 /* AppDelegate.swift */,
-				016A3C9B216058D1005515E0 /* ViewController.swift */,
-				016A3C9D216058D2005515E0 /* Assets.xcassets */,
-				016A3C9F216058D2005515E0 /* Main.storyboard */,
 				016A3CA2216058D2005515E0 /* Info.plist */,
-				016A3CA3216058D2005515E0 /* Art_Book.entitlements */,
+				016A3CA92160592C005515E0 /* Art Book.entitlements */,
+				016A3C9D216058D2005515E0 /* Assets.xcassets */,
+				016A3C99216058D1005515E0 /* AppDelegate.swift */,
+				0102E9B02162502500460577 /* Preferences.swift */,
+				0102E9B22162513500460577 /* URLSecurityScope.swift */,
+				01473003216099B700F658A6 /* Views */,
+				01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */,
 			);
 			path = "Art Book";
 			sourceTree = "<group>";
@@ -73,6 +186,9 @@
 				016A3C92216058D1005515E0 /* Sources */,
 				016A3C93216058D1005515E0 /* Frameworks */,
 				016A3C94216058D1005515E0 /* Resources */,
+				014730172160EC9100F658A6 /* CopyFiles */,
+				014730162160EC7D00F658A6 /* Run Script */,
+				013017E0216C79AE0074144B /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -95,6 +211,12 @@
 				TargetAttributes = {
 					016A3C95216058D1005515E0 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1000;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -123,18 +245,50 @@
 			files = (
 				016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */,
 				016A3CA1216058D2005515E0 /* Main.storyboard in Resources */,
+				013017E7216C89840074144B /* ImageItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		014730162160EC7D00F658A6 /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "#!/bin/bash\nBUILD_NUMBER=`git rev-list --all --count`\n/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $BUILD_NUMBER\" \"${TARGET_BUILD_DIR}\"/\"${INFOPLIST_PATH}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		016A3C92216058D1005515E0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				016A3C9C216058D1005515E0 /* ViewController.swift in Sources */,
+				013B5AB421717E2A0042F26D /* ImageCache.swift in Sources */,
+				0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */,
+				0102E9A02161FA7500460577 /* ContentViewController.swift in Sources */,
 				016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */,
+				013B5AB8217205E70042F26D /* SidebarAddButton.swift in Sources */,
+				01473005216099D500F658A6 /* SidebarViewController.swift in Sources */,
+				0102E9A62162085A00460577 /* Identifiers.swift in Sources */,
+				0147300721609F8600F658A6 /* FileNode.swift in Sources */,
+				014730092160A3B800F658A6 /* MainWindowController.swift in Sources */,
+				0102E9B32162513500460577 /* URLSecurityScope.swift in Sources */,
+				0102E9B12162502500460577 /* Preferences.swift in Sources */,
+				013017E8216C89840074144B /* ImageItemCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,17 +425,26 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Art Book/Art_Book.entitlements";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Art Book/Art Book.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H7NSMSBU6A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "Art Book/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.Art-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Art Book/Art Book-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Debug;
@@ -290,17 +453,25 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = "Art Book/Art_Book.entitlements";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = "Art Book/Art Book.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = H7NSMSBU6A;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Frameworks",
+				);
 				INFOPLIST_FILE = "Art Book/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.Art-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Art Book/Art Book-Bridging-Header.h";
 				SWIFT_VERSION = 4.2;
 			};
 			name = Release;
