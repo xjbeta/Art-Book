@@ -28,16 +28,13 @@ class ContentViewController: NSViewController {
             case .column:
                 let layout = CollectionViewColumnLayout()
                 layout.layoutStrategy = .shortestFirst
-                layout.columnCount = Int(collectionView.frame.width / baseWidth)
                 return layout
             case .flow:
                 let layout = CollectionViewFlowLayout()
-                layout.defaultItemStyle = .flow(CGSize(width: baseWidth, height: baseWidth))
                 layout.defaultRowTransform = .center
                 return layout
             case .list:
                 let layout = CollectionViewListLayout()
-                layout.sectionInsets = NSEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
                 return layout
             }
         }
@@ -123,25 +120,21 @@ class ContentViewController: NSViewController {
 
     
     func updateScale(_ animated: Bool) {
-        let scale = Preferences.shared.scales(for: viewMode)
+        let scale = CGFloat(Preferences.shared.scales(for: viewMode))
         let width = baseWidth * CGFloat(scale + 0.2) * 2.5
         let layout = collectionView.collectionViewLayout
         
         if let l = layout as? CollectionViewColumnLayout {
-            
+            l.columnCount = Int(collectionView.frame.width / baseWidth / (1 + scale))
             self.collectionView.reloadLayout(animated)
         } else if let l = layout as? CollectionViewFlowLayout {
             l.defaultItemStyle = .flow(NSSize(width: width, height: width))
             self.collectionView.reloadLayout(animated)
         } else if let l = layout as? CollectionViewListLayout {
-            let width = self.collectionView.frame.width * (0.5 - CGFloat(scale / 2)) / 2
-            l.sectionInsets = NSEdgeInsets.init(top: 0, left: width, bottom: 0, right: width)
+            let width = self.collectionView.frame.width * (0.5 - scale / 2) / 2
+            l.sectionInsets = NSEdgeInsets(top: 0, left: width, bottom: 0, right: width)
             self.collectionView.reloadLayout(animated, scrollPosition: CollectionViewScrollPosition.centered) { _ in }
         }
-        
-        
-        
-        
     }
     
     deinit {
