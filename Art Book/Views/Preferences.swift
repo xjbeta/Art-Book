@@ -17,30 +17,47 @@ class Preferences: NSObject {
     private let prefs = UserDefaults.standard
     private let keys = PreferenceKeys.self
     
-//    var favourites: [URL] {
-//        get {
-////            let bookmarks = defaults(.favourites) as? [String: Data] ?? [:]
-////            favouriteKeys
-//            
-//            
-//        }
-//        set {
-//            defaultsSet(newValue, forKey: .favourites)
-//        }
-//    }
+    var favourites: [URL] {
+        get {
+            guard let favourites = defaults(.favourites) as? [String: Data] else { return [] }
+            let keys = favourites.keys.sorted()
+            let urls = keys.compactMap { key -> URL? in
+                guard let data = favourites[key],
+                    let url = URLSecurityScope.resolvingBookmark(data) else {
+                    return nil
+                }
+                return url
+            }
+            return urls
+        }
+    }
+
     
-//    func addFavourite(_ url: URL) {
-//        var urlData = favourites[url.path]
-//        if urlData == nil {
-//            do {
-//                let data = try url.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
-//                favourites[url.path] = data
-//                urlData = data
-//            } catch {
-//                print("creatBookmarkError:\(error)")
-//            }
-//        }
-//    }
+    func removeFavourite(_ url: URL) {
+        guard var favourites = defaults(.favourites) as? [String: Data] else { return }
+        
+        favourites.filter {
+            URLSecurityScope.resolvingBookmark($0.value) == url
+            }.keys.forEach {
+                favourites.removeValue(forKey: $0)
+        }
+        defaultsSet(favourites, forKey: .favourites)
+    }
+    
+    
+    func addFavourite(_ url: URL) {
+        var favourites = defaults(.favourites) as? [String: Data] ?? [String: Data]()
+        var newKey = "1.0"
+        if let maxKeyStr = favourites.keys.max(), let maxKey = Double(maxKeyStr) {
+            newKey = "\(maxKey + 1)"
+        } else {
+            assert(favourites.count == 0)
+        }
+        
+        favourites[newKey] = URLSecurityScope.bookmarkData(for: url)
+        
+        defaultsSet(favourites, forKey: .favourites)
+    }
     
     func setScales(_ value: Double, for view: ViewMode) {
         var dic = defaults(.scales) as? [String: Double] ?? [String: Double]()
@@ -70,6 +87,5 @@ private extension Preferences {
 
 enum PreferenceKeys: String {
     case favourites
-    case favouriteKeys
     case scales
 }

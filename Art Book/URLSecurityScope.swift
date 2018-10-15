@@ -9,33 +9,34 @@
 import Foundation
 
 // MARK: - Security-Scoped
-extension URL {
-    func addSecurityScope() -> URL? {
-        var urlData = UserDefaults.standard.data(forKey: self.path)
-        if urlData == nil {
-            do {
-                let data = try self.bookmarkData(options: .withSecurityScope, includingResourceValuesForKeys: nil, relativeTo: nil)
-                UserDefaults.standard.set(data, forKey: self.path)
-                urlData = data
-            } catch {
-                print("creatBookmarkError:\(error)")
-            }
+
+
+class URLSecurityScope: NSObject {
+    static func resolvingBookmark(_ data: Data) -> URL? {
+        do {
+            var bool = false
+            let url = try URL(resolvingBookmarkData: data,
+                              options: .withSecurityScope,
+                              relativeTo: nil,
+                              bookmarkDataIsStale: &bool)
+//            let _ = url.startAccessingSecurityScopedResource()
+            return url
+        } catch {
+            print("resolveBookmarkError\(error)")
+            return nil
         }
-        if let data = urlData {
-            do {
-                var bool = false
-                let url = try URL(resolvingBookmarkData: data, options: .withSecurityScope, relativeTo: nil, bookmarkDataIsStale: &bool)
-                let _ = url.startAccessingSecurityScopedResource()
-                return url
-            } catch {
-                print("resolveBookmarkError\(error)")
-            }
-        }
-        return nil
     }
     
-    func removeSecurityScope() {
-        UserDefaults.standard.removeObject(forKey: self.path)
-        self.stopAccessingSecurityScopedResource()
+    static func bookmarkData(for url: URL) -> Data? {
+        do {
+            let data = try url.bookmarkData(options: .withSecurityScope,
+                                            includingResourceValuesForKeys: nil,
+                                            relativeTo: nil)
+            return data
+        } catch {
+            print("creatBookmarkError:\(error)")
+            return nil
+        }
     }
+    
 }

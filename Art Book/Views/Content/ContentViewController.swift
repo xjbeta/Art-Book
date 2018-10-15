@@ -13,6 +13,7 @@ class ContentViewController: NSViewController {
 
     @IBOutlet weak var collectionView: CollectionView!
     
+    @IBOutlet var collectionMenu: NSMenu!
     var frameObserve: NSKeyValueObservation?
     var fileNode: FileNode? = nil
     

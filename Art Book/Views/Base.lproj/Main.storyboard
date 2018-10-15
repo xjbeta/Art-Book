@@ -842,10 +842,24 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="collectionMenu" destination="zso-uB-xcN" id="jnY-bZ-7ny"/>
                         <outlet property="collectionView" destination="Kv8-pS-o92" id="y74-8q-cYy"/>
                     </connections>
                 </viewController>
                 <customObject id="rnm-8A-xyl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <menu id="zso-uB-xcN">
+                    <items>
+                        <menuItem title="Item 1" id="ogh-ea-9qt">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 2" id="7ra-0V-Q6P">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                        <menuItem title="Item 3" id="ksO-Tv-aPT">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="178" y="1277"/>
         </scene>
@@ -890,7 +904,7 @@
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ujF-s8-V5Z">
                                                                     <rect key="frame" x="0.0" y="2" width="145" height="14"/>
                                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="HEADER CELL" id="8Qm-Ty-est">
-                                                                        <font key="font" metaFont="smallSystem"/>
+                                                                        <font key="font" metaFont="systemMedium" size="11"/>
                                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                         <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                     </textFieldCell>
@@ -964,6 +978,7 @@
                                             <connections>
                                                 <outlet property="dataSource" destination="veI-ro-lad" id="TNN-en-bju"/>
                                                 <outlet property="delegate" destination="veI-ro-lad" id="7jq-My-Ncv"/>
+                                                <outlet property="menu" destination="xXn-g1-mEA" id="sAz-jl-2bV"/>
                                             </connections>
                                         </outlineView>
                                     </subviews>
@@ -1014,6 +1029,22 @@
                         <binding destination="veI-ro-lad" name="contentArray" keyPath="fileNodes" id="Xod-QH-6zs"/>
                     </connections>
                 </treeController>
+                <menu id="xXn-g1-mEA">
+                    <items>
+                        <menuItem title="Show in Finder" id="8w3-Xr-kho">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="veI-ro-lad" id="Ccx-U7-qdJ"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem title="Remove from sidebar" id="Ymn-Lp-EHH">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="removeFromSidebar:" target="veI-ro-lad" id="pbw-F6-Fqx"/>
+                            </connections>
+                        </menuItem>
+                    </items>
+                </menu>
             </objects>
             <point key="canvasLocation" x="-314" y="1277"/>
         </scene>
