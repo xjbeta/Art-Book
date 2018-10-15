@@ -52,13 +52,8 @@ class ContentViewController: NSViewController {
         updateScale(false)
         
         frameObserve = collectionView.observe(\.frame) { view, _ in
-            if let layout = view.collectionViewLayout as? CollectionViewColumnLayout {
-                let oldColumnCount = layout.columnCount
-                let newColumnCount = Int(view.frame.width / self.baseWidth)
-                if newColumnCount != oldColumnCount {
-                    layout.columnCount = newColumnCount
-                    view.reloadLayout(false)
-                }
+            if view.collectionViewLayout is CollectionViewColumnLayout {
+                self.updateScale(false)
             }
         }
 
