@@ -679,7 +679,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="0.0"/>
+            <point key="canvasLocation" x="76" y="-294"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -687,9 +687,9 @@
                 <windowController id="B8D-0N-5wS" customClass="MainWindowController" customModule="Art_Book" customModuleProvider="target" sceneMemberID="viewController">
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MainWindow" animationBehavior="default" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
-                        <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="196" y="240" width="480" height="270"/>
+                        <rect key="contentRect" x="196" y="240" width="960" height="540"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <value key="minSize" type="size" width="960" height="540"/>
                         <toolbar key="toolbar" implicitIdentifier="DA408295-5D59-44DC-920F-96B931017B4E" displayMode="iconOnly" sizeMode="regular" id="fpd-jo-Pxm">
                             <allowedToolbarItems>
                                 <toolbarItem implicitItemIdentifier="NSToolbarSpaceItem" id="Huo-ne-qVE"/>
@@ -777,7 +777,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="250"/>
+            <point key="canvasLocation" x="75" y="97"/>
         </scene>
         <!--Split View Controller-->
         <scene sceneID="vRY-LQ-Kus">
@@ -872,13 +872,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-i0-cOu">
-                                <rect key="frame" x="0.0" y="28" width="148" height="432"/>
+                                <rect key="frame" x="0.0" y="37" width="148" height="423"/>
                                 <clipView key="contentView" drawsBackground="NO" id="QGW-Pf-dNG">
-                                    <rect key="frame" x="0.0" y="0.0" width="148" height="432"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="148" height="423"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="1A8-dQ-bpc" id="G9S-Qo-OcY" customClass="SidebarOutlineView" customModule="Art_Book" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="432"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="148" height="423"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -995,7 +995,7 @@
                                 </scroller>
                             </scrollView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bEf-u0-hzp" customClass="SidebarAddButton" customModule="Art_Book" customModuleProvider="target">
-                                <rect key="frame" x="18" y="8" width="115" height="17"/>
+                                <rect key="frame" x="20" y="12" width="71" height="17"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="17" id="Eud-Mw-A33"/>
                                 </constraints>
@@ -1009,13 +1009,13 @@
                             </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="bEf-u0-hzp" firstAttribute="leading" secondItem="uE8-Rv-wRh" secondAttribute="leading" constant="18" id="2ea-Fm-ZAn"/>
                             <constraint firstItem="fUN-i0-cOu" firstAttribute="leading" secondItem="uE8-Rv-wRh" secondAttribute="leading" id="6gp-yG-dxk"/>
                             <constraint firstItem="fUN-i0-cOu" firstAttribute="top" secondItem="uE8-Rv-wRh" secondAttribute="top" id="9UY-OX-huo"/>
                             <constraint firstAttribute="trailing" secondItem="fUN-i0-cOu" secondAttribute="trailing" id="KkH-7l-EJX"/>
-                            <constraint firstAttribute="trailing" secondItem="bEf-u0-hzp" secondAttribute="trailing" constant="15" id="Kzx-pe-V5G"/>
-                            <constraint firstAttribute="bottom" secondItem="bEf-u0-hzp" secondAttribute="bottom" constant="8" id="Oes-w3-Kde"/>
-                            <constraint firstAttribute="bottom" secondItem="fUN-i0-cOu" secondAttribute="bottom" constant="28" id="rRG-af-9T4"/>
+                            <constraint firstItem="bEf-u0-hzp" firstAttribute="top" secondItem="fUN-i0-cOu" secondAttribute="bottom" constant="8" id="OJu-aj-Lzd"/>
+                            <constraint firstAttribute="bottom" secondItem="bEf-u0-hzp" secondAttribute="bottom" constant="12" id="Oes-w3-Kde"/>
+                            <constraint firstItem="bEf-u0-hzp" firstAttribute="leading" secondItem="uE8-Rv-wRh" secondAttribute="leading" constant="20" id="iGO-F7-XcN"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="bEf-u0-hzp" secondAttribute="trailing" constant="20" id="kgQ-S3-h48"/>
                         </constraints>
                     </view>
                     <connections>
