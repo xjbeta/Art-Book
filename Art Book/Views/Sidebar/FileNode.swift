@@ -7,53 +7,46 @@
 //
 
 import Cocoa
-//import Kingfisher
-import Quartz
 
 @objc(FileNode)
 class FileNode: NSObject {
 
     @objc dynamic var name: String = ""
-    @objc dynamic var childrenDics: [FileNode] {
-        get {
-            guard let url = url else { return [] }
-            do {
-                let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles)
-                    .filter { url -> Bool in
-                        return try url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory ?? false
-                }
-                return urls.map {
-                    FileNode.init(url: $0)
-                }
-            } catch let error {
-                print(error)
-            }
-            return []
-        }
-    }
-    private var savedChildrenImages: [FileNode] = []
-    
-    var childrenImages: [FileNode] {
-        get {
-            guard savedChildrenImages.count == 0 else { return savedChildrenImages }
-            guard let url = url else { return [] }
-            do {
-                let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
-
-                    .filter {
-                        $0.isImage()
-                    }.sorted(by: { $0.lastPathComponent < $1.lastPathComponent })
-                let nodes = urls.map {
+    @objc dynamic lazy var childrenDics: [FileNode] = {
+        guard let url = url else { return [] }
+        do {
+            let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles)
+            var nodes = try urls.filter { url -> Bool in
+                return try url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory ?? false
+                }.map {
                     FileNode(url: $0)
-                }
-                savedChildrenImages = nodes
-                return nodes
-            } catch let error {
-                print(error)
             }
-            return []
+            nodes.sort { $0.name < $1.name }
+            return nodes
+        } catch let error {
+            print(error)
         }
-    }
+        return []
+    }()
+    
+    lazy var childrenImages: [FileNode] = {
+        guard let url = url else { return [] }
+        do {
+            let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles)
+            var nodes = try urls.filter { url -> Bool in
+                return !(try url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory ?? false)
+                }.filter {
+                    $0.isImage()
+                }.map {
+                    FileNode(url: $0)
+            }
+            nodes.sort { $0.name < $1.name }
+            return nodes
+        } catch let error {
+            print(error)
+        }
+        return []
+    }()
     
     private var savedImageRatio: CGFloat?
     var imageRatio: CGFloat? {
@@ -90,27 +83,12 @@ class FileNode: NSObject {
         super.init()
         self.url = url
         name = url.lastPathComponent
-        
-        DispatchQueue.global().async {
-            let _ = self.imageRatio
-//            let _ = self.childrenImages
-        }
     }
     
-    override func imageRepresentationType() -> String! {
-        return IKImageBrowserPathRepresentationType
-    }
-    
-    override func imageRepresentation() -> Any! {
-        return url?.path
-    }
-    
-    override func imageUID() -> String! {
-        return url?.path
-    }
-    
-    override func imageTitle() -> String! {
-        return url?.lastPathComponent
+    func getChild(_ name: String) -> FileNode? {
+        return childrenDics.filter {
+            $0.name == name
+            }.first
     }
 }
 

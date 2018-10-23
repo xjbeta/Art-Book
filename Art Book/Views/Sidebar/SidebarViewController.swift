@@ -29,11 +29,13 @@ class SidebarViewController: NSViewController {
     }
     
     @objc dynamic var fileNodes: [FileNode] = []
+    var fileWatcher: FileWatcher?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initAddFolder()
         initNodes()
+        filesObserver()
     }
     
     func initAddFolder() {
@@ -87,6 +89,88 @@ class SidebarViewController: NSViewController {
         }
     }
     
+    
+    func filesObserver() {
+        let paths = fileNodes.compactMap {
+            $0.url?.path
+        }
+        fileWatcher?.stop()
+        fileWatcher = nil
+        fileWatcher = FileWatcher(paths) { [weak self] event in
+            // check is hidden url
+            let url = URL(fileURLWithPath: event.path)
+            guard !url.lastPathComponent.starts(with: ".") else { return }
+            
+            // check url is Directory
+            // The doesn't exist file will skip Directory checker
+            var isDirectory = ObjCBool(true)
+            let exists = FileManager.default.fileExists(atPath: event.path, isDirectory: &isDirectory)
+            guard isDirectory.boolValue else { return }
+            
+            guard let rootNodes = self?.fileNodes.filter({ node -> Bool in
+                guard let url = node.url else { return false }
+                return event.path.isChildPath(of: url.path)
+            }) else { return }
+            rootNodes.forEach { node in
+                var pathComponents = event.path.pathComponents
+                let title = pathComponents.last ?? ""
+                
+                pathComponents.removeSubrange(0 ..< node.url!.pathComponents.count)
+                pathComponents = Array(pathComponents.dropLast())
+                var currentNode = node
+                while !pathComponents.isEmpty {
+                    guard let title = pathComponents.first,
+                        let node = currentNode.getChild(title) else {
+                        pathComponents.removeAll()
+                        return
+                    }
+                    pathComponents.removeFirst()
+                    currentNode = node
+                }
+                
+                // finded parent directory node -> currentNode
+                
+                if !exists {
+                    // deleted file/path
+                    guard let index = currentNode.childrenDics.enumerated().filter ({
+                        $0.element.name == title
+                        }).map ({
+                            $0.offset
+                        }).first else { return }
+                    currentNode.childrenDics.remove(at: index)
+                    return
+                }
+                
+                if event.dirCreated || event.dirRenamed {
+                    let newNode = FileNode(url: url)
+                    if let index = currentNode.childrenDics.index(where: { $0.name > newNode.name }) {
+                        currentNode.childrenDics.insert(newNode, at: index)
+                    }
+                } else if event.dirModified {
+                    print("dirModified")
+                    
+                } else if event.dirRemoved {
+                    print("dirRemoved")
+                    
+                } else if event.fileRemoved || event.fileModified || event.fileChange || event.fileCreated || event.fileRenamed {
+                    return
+                } else {
+                    print("Unknown file watcher event.")
+                    print(event.description)
+                }
+                
+                
+            }
+        }
+        
+        fileWatcher?.start()
+    }
+    
+    
+    deinit {
+        fileWatcher?.stop()
+        fileWatcher = nil
+    }
 }
 
 extension SidebarViewController: NSOutlineViewDelegate, NSOutlineViewDataSource {
@@ -153,7 +237,7 @@ extension SidebarViewController: NSMenuItemValidation {
         }
         
         if menuItem.action == #selector(removeFromSidebar) {
-            return fileNodes.contains(item)
+//            return fileNodes.contains(item) && item.
         }
         return true
     }
@@ -176,4 +260,28 @@ extension SidebarViewController: NSMenuItemValidation {
         initNodes()
     }
     
+}
+
+
+extension String {
+    var pathComponents: [String] {
+        get {
+            return (self.standardizingPath as NSString).pathComponents
+        }
+    }
+    
+    var standardizingPath: String {
+        get {
+            return (self as NSString).standardizingPath
+        }
+    }
+    
+    func isChildPath(of url: String) -> Bool {
+        guard self.pathComponents.count > url.pathComponents.count else {
+            return false
+        }
+        var t = self.pathComponents
+        t.removeSubrange(url.pathComponents.count ..< self.pathComponents.count)
+        return t == url.pathComponents
+    }
 }
