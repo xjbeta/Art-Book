@@ -15,7 +15,13 @@ class ContentViewController: NSViewController {
     
     @IBOutlet var collectionMenu: NSMenu!
     var frameObserve: NSKeyValueObservation?
-    var fileNode: FileNode? = nil
+    
+    var fileWatcher: FileWatcher?
+    var fileNode: FileNode? = nil {
+        didSet {
+            filesObserver()
+        }
+    }
     
     let useCollectionView = true
     var baseWidth: CGFloat = 160
@@ -133,8 +139,67 @@ class ContentViewController: NSViewController {
         }
     }
     
+    func filesObserver() {
+        guard let path = fileNode?.url?.path else { return }
+        fileWatcher?.stop()
+        fileWatcher = nil
+        fileWatcher = FileWatcher([path]) { [weak self] event in
+            // check is hidden url
+            let url = URL(fileURLWithPath: event.path)
+            guard !url.lastPathComponent.starts(with: ".") else { return }
+            
+            // check is child of observed folder
+            guard url.path.isChildItem(of: path) else { return }
+            
+            // check url is Directory
+            // The doesn't exist file will skip Directory checker
+            var isDirectory = ObjCBool(false)
+            let exists = FileManager.default.fileExists(atPath: event.path, isDirectory: &isDirectory)
+            guard !isDirectory.boolValue else { return }
+            
+            if !exists {
+                // deleted file/path
+                guard let index = self?.fileNode?.childrenImages.enumerated().filter ({
+                    $0.element.name == url.lastPathComponent
+                }).map ({
+                    $0.offset
+                }).first else { return }
+                self?.fileNode?.childrenImages.remove(at: index)
+                self?.collectionView.deleteItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                return
+            }
+            
+            if event.fileCreated || event.fileRenamed {
+                let newNode = FileNode(url: url)
+                if let index = self?.fileNode?.childrenImages.index(where: { $0.name > newNode.name }) {
+                    self?.fileNode?.childrenImages.insert(newNode, at: index)
+                    self?.collectionView.insertItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                }
+            } else if event.fileModified {
+                guard let index = self?.fileNode?.childrenImages.enumerated().filter ({
+                    $0.element.name == url.lastPathComponent
+                }).map ({
+                    $0.offset
+                }).first else { return }
+                self?.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)], animated: false)
+            } else if event.fileRemoved {
+                print("dirRemoved")
+                
+            } else if event.dirRemoved || event.dirModified || event.dirChange || event.dirCreated || event.dirRenamed {
+                return
+            } else {
+                print("Unknown file watcher event.")
+                print(event.description)
+            }
+        }
+        
+        fileWatcher?.start()
+    }
+    
     deinit {
         frameObserve?.invalidate()
+        fileWatcher?.stop()
+        fileWatcher = nil
     }
 }
 
@@ -270,8 +335,4 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
         guard let cell = cell as? ImageItemCell else { return }
         cell.isDisplaying = false
     }
-    
-    
-    
-    
 }

@@ -284,4 +284,10 @@ extension String {
         t.removeSubrange(url.pathComponents.count ..< self.pathComponents.count)
         return t == url.pathComponents
     }
+    
+    func isChildItem(of url: String) -> Bool {
+        var pathComponents = self.pathComponents
+        pathComponents.removeLast()
+        return pathComponents == url.pathComponents
+    }
 }
