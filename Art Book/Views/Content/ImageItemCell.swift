@@ -147,19 +147,26 @@ class ImageItemCell: CollectionViewPreviewCell {
         return true
     }
     
-    func requestPreviewImage() {
-        
-        guard markWidth != imageView.frame.width - 8 else { return }
-        markWidth = imageView.frame.width - 8
+    func requestPreviewImage(_ update: Bool = false) {
+        if update {
+            imageSource = nil
+        } else {
+            guard markWidth != imageView.frame.width - 8 else { return }
+            markWidth = imageView.frame.width - 8
+        }
+
         loadImageOperation?.cancel()
-        
         
         guard let scale = NSScreen.main?.backingScaleFactor, let url = self.url else {
             return
         }
         
         let maxPixelSize = (Int(markWidth * scale / 100) + 1) * 100
-        let cacheKey = "\(url.absoluteString) - \(maxPixelSize)"
+        var cacheKey = "\(url.absoluteString) - \(maxPixelSize) - "
+        
+        if let date = fileModificationDate(url: url) {
+            cacheKey += "\(date)"
+        }
         
         if let image = ImageCache.image(forKey: cacheKey) {
             previewImage = image
@@ -215,5 +222,13 @@ class ImageItemCell: CollectionViewPreviewCell {
     }()
     
     
+    func fileModificationDate(url: URL) -> Date? {
+        do {
+            let attr = try FileManager.default.attributesOfItem(atPath: url.path)
+            return attr[FileAttributeKey.modificationDate] as? Date
+        } catch {
+            return nil
+        }
+    }
 }
 

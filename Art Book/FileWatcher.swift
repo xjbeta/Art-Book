@@ -30,10 +30,12 @@ class FileWatcher {
             copyDescription:nil)
 
         streamRef = FSEventStreamCreate(
-            kCFAllocatorDefault, eventCallback, &context,
-            filePaths as CFArray,FSEventStreamEventId(kFSEventStreamEventIdSinceNow), 0.5,
+            kCFAllocatorDefault,
+            eventCallback,
+            &context,
+            filePaths as CFArray,FSEventStreamEventId(kFSEventStreamEventIdSinceNow),
+            0.5,
             UInt32(kFSEventStreamCreateFlagUseCFTypes | kFSEventStreamCreateFlagFileEvents))
-
         selectStreamScheduler()
         FSEventStreamStart(streamRef!)
     }
@@ -51,7 +53,7 @@ class FileWatcher {
         streamRef = nil
     }
 
-    private let eventCallback:FSEventStreamCallback = {(
+    private let eventCallback: FSEventStreamCallback = {(
         stream: ConstFSEventStreamRef,
         contextInfo: UnsafeMutableRawPointer?,
         numEvents: Int,
@@ -93,14 +95,17 @@ extension FileWatcher {
     }
 }
 
-class FileWatcherEvent{
-    var id:FSEventStreamEventId
-    var path:String
+class FileWatcherEvent {
+    var id: FSEventStreamEventId
+    var path: String
     var flags: FSEventStreamEventFlags
-    init(_ eventId:FSEventStreamEventId, _ eventPath: String, _ eventFlags: FSEventStreamEventFlags){
+    init(_ eventId: FSEventStreamEventId,
+         _ eventPath: String,
+         _ eventFlags: FSEventStreamEventFlags) {
         self.id = eventId
         self.path = eventPath
         self.flags = eventFlags
+        print(description)
     }
 }
 /**

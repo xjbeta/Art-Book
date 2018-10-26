@@ -170,21 +170,29 @@ class ContentViewController: NSViewController {
             }
             
             if event.fileCreated || event.fileRenamed {
-                let newNode = FileNode(url: url)
-                if let index = self?.fileNode?.childrenImages.index(where: { $0.name > newNode.name }) {
-                    self?.fileNode?.childrenImages.insert(newNode, at: index)
-                    self?.collectionView.insertItems(at: [IndexPath(item: index, section: 0)], animated: true)
-                }
-            } else if event.fileModified {
+                
                 guard let index = self?.fileNode?.childrenImages.enumerated().filter ({
                     $0.element.name == url.lastPathComponent
                 }).map ({
                     $0.offset
-                }).first else { return }
-                self?.collectionView.reloadItems(at: [IndexPath(item: index, section: 0)], animated: false)
-            } else if event.fileRemoved {
-                print("dirRemoved")
+                }).first else {
+                    let newNode = FileNode(url: url)
+                    if let index = self?.fileNode?.childrenImages.index(where: { $0.name > newNode.name }) {
+                        self?.fileNode?.childrenImages.insert(newNode, at: index)
+                        self?.collectionView.insertItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                    }
+                    return
+                }
                 
+                let indexPath = IndexPath(item: index, section: 0)
+                self?.collectionView.reloadItems(at: [indexPath], animated: false)
+                if let cell = self?.collectionView.cellForItem(at: indexPath) as? ImageItemCell {
+                    cell.requestPreviewImage(true)
+                }
+            } else if event.fileModified {
+                print("fileModified")
+            } else if event.fileRemoved {
+                print("fileRemoved")
             } else if event.dirRemoved || event.dirModified || event.dirChange || event.dirCreated || event.dirRenamed {
                 return
             } else {
