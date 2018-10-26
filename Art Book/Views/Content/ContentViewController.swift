@@ -73,7 +73,7 @@ class ContentViewController: NSViewController {
                 let node = userInfo["node"] {
                 self.fileNode = node
                 self.collectionView.reloadData()
-                QLPreviewPanel.shared().reloadData()
+                self.reloadPreviewPanel()
             }
         }
         
@@ -83,7 +83,7 @@ class ContentViewController: NSViewController {
                 self.viewMode = viewMode
                 self.collectionView.collectionViewLayout = self.layout
                 self.updateScale(true)
-                QLPreviewPanel.shared().reloadData()
+                self.reloadPreviewPanel()
             }
         }
         
@@ -228,6 +228,15 @@ class ContentViewController: NSViewController {
             panel.center()
         }
     }
+    
+    private func reloadPreviewPanel() {
+        guard let panel = QLPreviewPanel.shared() else { return }
+        if QLPreviewPanel.sharedPreviewPanelExists() && panel.isVisible {
+            panel.reloadData()
+        }
+    }
+    
+    
     var markEvent: NSEvent? = nil
     
     deinit {
@@ -371,7 +380,7 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     }
     
     func collectionView(_ collectionView: CollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
-        QLPreviewPanel.shared().reloadData()
+        reloadPreviewPanel()
     }
 }
 
