@@ -8,6 +8,7 @@
 
 import Cocoa
 import CollectionView
+import Quartz
 
 class ContentViewController: NSViewController {
 
@@ -70,6 +71,7 @@ class ContentViewController: NSViewController {
                 let node = userInfo["node"] {
                 self.fileNode = node
                 self.collectionView.reloadData()
+                QLPreviewPanel.shared().reloadData()
             }
         }
         
@@ -79,6 +81,7 @@ class ContentViewController: NSViewController {
                 self.viewMode = viewMode
                 self.collectionView.collectionViewLayout = self.layout
                 self.updateScale(true)
+                QLPreviewPanel.shared().reloadData()
             }
         }
         
@@ -203,6 +206,27 @@ class ContentViewController: NSViewController {
         
         fileWatcher?.start()
     }
+    
+    override func keyDown(with event: NSEvent) {
+        switch event.keyCode {
+        case 49: // Space
+            togglePreviewPanel()
+        default:
+            return
+        }
+    }
+    
+    private func togglePreviewPanel() {
+        guard let panel = QLPreviewPanel.shared() else { return }
+        if QLPreviewPanel.sharedPreviewPanelExists() && panel.isVisible {
+            panel.orderOut(nil)
+        } else {
+            guard collectionView.indexPathsForSelectedItems.count > 0 else { return }
+            panel.orderFront(nil)
+            panel.center()
+        }
+    }
+    var markEvent: NSEvent? = nil
     
     deinit {
         frameObserve?.invalidate()
@@ -342,5 +366,56 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     func collectionView(_ collectionView: CollectionView, didEndDisplayingCell cell: CollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? ImageItemCell else { return }
         cell.isDisplaying = false
+    }
+    
+    func collectionView(_ collectionView: CollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
+        QLPreviewPanel.shared().reloadData()
+    }
+}
+
+
+extension ContentViewController: QLPreviewPanelDelegate, QLPreviewPanelDataSource {
+    
+    override func acceptsPreviewPanelControl(_ panel: QLPreviewPanel!) -> Bool {
+        return collectionView.indexPathsForSelectedItems.count > 0
+    }
+    override func beginPreviewPanelControl(_ panel: QLPreviewPanel!) {
+        panel.delegate = self
+        panel.dataSource = self
+        markEvent = nil
+    }
+    override func endPreviewPanelControl(_ panel: QLPreviewPanel!) {
+        markEvent = nil
+    }
+    
+    func numberOfPreviewItems(in panel: QLPreviewPanel!) -> Int {
+        return collectionView.indexPathsForSelectedItems.count
+    }
+    
+    func previewPanel(_ panel: QLPreviewPanel!, previewItemAt index: Int) -> QLPreviewItem! {
+        guard let indexPath = collectionView.indexPathsForSelectedItems.first,
+            let url = fileNode?.childrenImages[indexPath.item].url else {
+            return nil
+        }
+        return url as QLPreviewItem
+    }
+    
+    
+    func previewPanel(_ panel: QLPreviewPanel!, handle event: NSEvent!) -> Bool {
+        if markEvent == nil {
+            markEvent = event
+        } else {
+            markEvent = nil
+            return false
+        }
+        
+        switch event.keyCode {
+        case 123, 124, 125, 126: // Left, Right, Up, Down
+            collectionView.keyDown(with: event)
+            QLPreviewPanel.shared().reloadData()
+        default:
+            return false
+        }
+        return true
     }
 }
