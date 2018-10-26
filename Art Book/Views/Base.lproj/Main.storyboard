@@ -812,38 +812,79 @@
                         <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv8-pS-o92" customClass="CollectionView" customModule="CollectionView">
+                            <tabView type="noTabsNoBorder" translatesAutoresizingMaskIntoConstraints="NO" id="DXc-VQ-nzY">
                                 <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
-                                <clipView key="contentView" id="vjV-sh-Odq">
-                                    <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-EF-x5i">
-                                            <rect key="frame" x="0.0" y="0.0" width="529" height="445"/>
+                                <font key="font" metaFont="system"/>
+                                <tabViewItems>
+                                    <tabViewItem label="NoImages" identifier="NoImages" id="cfc-fa-zQ0">
+                                        <view key="view" id="Nrc-5j-iVg">
+                                            <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cQu-iN-Tjf">
+                                                    <rect key="frame" x="223" y="218" width="99" height="25"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="No Images" id="buK-sc-keP">
+                                                        <font key="font" metaFont="system" size="21"/>
+                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="cQu-iN-Tjf" firstAttribute="centerY" secondItem="Nrc-5j-iVg" secondAttribute="centerY" id="LFt-Ki-3aU"/>
+                                                <constraint firstItem="cQu-iN-Tjf" firstAttribute="centerX" secondItem="Nrc-5j-iVg" secondAttribute="centerX" id="rmF-ms-ZiL"/>
+                                            </constraints>
                                         </view>
-                                    </subviews>
-                                </clipView>
-                                <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="viH-96-XIN">
-                                    <rect key="frame" x="0.0" y="444" width="544" height="16"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="AXT-DQ-6Pf">
-                                    <rect key="frame" x="528" y="0.0" width="16" height="460"/>
-                                    <autoresizingMask key="autoresizingMask"/>
-                                </scroller>
-                            </scrollView>
+                                    </tabViewItem>
+                                    <tabViewItem label="Content" identifier="Content" id="YN8-Aa-Dv6">
+                                        <view key="view" id="NeS-dk-CfG">
+                                            <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <scrollView borderType="none" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kv8-pS-o92" customClass="CollectionView" customModule="CollectionView">
+                                                    <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
+                                                    <clipView key="contentView" id="vjV-sh-Odq">
+                                                        <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Mva-EF-x5i">
+                                                                <rect key="frame" x="0.0" y="0.0" width="529" height="445"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                            </view>
+                                                        </subviews>
+                                                    </clipView>
+                                                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="viH-96-XIN">
+                                                        <rect key="frame" x="0.0" y="444" width="544" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="AXT-DQ-6Pf">
+                                                        <rect key="frame" x="528" y="0.0" width="16" height="460"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                </scrollView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="Kv8-pS-o92" secondAttribute="bottom" id="aMF-db-qfO"/>
+                                                <constraint firstAttribute="trailing" secondItem="Kv8-pS-o92" secondAttribute="trailing" id="bq6-Yh-yky"/>
+                                                <constraint firstItem="Kv8-pS-o92" firstAttribute="leading" secondItem="NeS-dk-CfG" secondAttribute="leading" id="pQp-zg-ezD"/>
+                                                <constraint firstItem="Kv8-pS-o92" firstAttribute="top" secondItem="NeS-dk-CfG" secondAttribute="top" id="yxs-DE-MOz"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                </tabViewItems>
+                            </tabView>
                         </subviews>
                         <constraints>
-                            <constraint firstAttribute="bottom" secondItem="Kv8-pS-o92" secondAttribute="bottom" id="7E8-Ll-x8z"/>
-                            <constraint firstItem="Kv8-pS-o92" firstAttribute="top" secondItem="Kfa-pL-8DD" secondAttribute="top" id="CDi-a3-TNa"/>
-                            <constraint firstItem="Kv8-pS-o92" firstAttribute="leading" secondItem="Kfa-pL-8DD" secondAttribute="leading" id="DVW-Le-G6P"/>
-                            <constraint firstAttribute="trailing" secondItem="Kv8-pS-o92" secondAttribute="trailing" id="yn8-ZE-wah"/>
+                            <constraint firstAttribute="trailing" secondItem="DXc-VQ-nzY" secondAttribute="trailing" id="7CU-MM-qFd"/>
+                            <constraint firstItem="DXc-VQ-nzY" firstAttribute="top" secondItem="Kfa-pL-8DD" secondAttribute="top" id="Inx-EW-gxj"/>
+                            <constraint firstItem="DXc-VQ-nzY" firstAttribute="leading" secondItem="Kfa-pL-8DD" secondAttribute="leading" id="mC1-Y8-FqQ"/>
+                            <constraint firstAttribute="bottom" secondItem="DXc-VQ-nzY" secondAttribute="bottom" id="yfL-uF-FDD"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionMenu" destination="zso-uB-xcN" id="jnY-bZ-7ny"/>
                         <outlet property="collectionView" destination="Kv8-pS-o92" id="y74-8q-cYy"/>
+                        <outlet property="tabView" destination="DXc-VQ-nzY" id="K91-A6-ORc"/>
                     </connections>
                 </viewController>
                 <customObject id="rnm-8A-xyl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>

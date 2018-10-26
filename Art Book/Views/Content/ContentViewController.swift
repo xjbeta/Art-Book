@@ -13,6 +13,7 @@ import Quartz
 class ContentViewController: NSViewController {
 
     @IBOutlet weak var collectionView: CollectionView!
+    @IBOutlet weak var tabView: NSTabView!
     
     @IBOutlet var collectionMenu: NSMenu!
     var frameObserve: NSKeyValueObservation?
@@ -21,6 +22,7 @@ class ContentViewController: NSViewController {
     var fileNode: FileNode? = nil {
         didSet {
             filesObserver()
+            fileNode?.childrenDics.count ?? 0 > 0 ? tabView.selectTabViewItem(at: 0) : tabView.selectTabViewItem(at: 1)
         }
     }
     

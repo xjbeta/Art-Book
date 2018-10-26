@@ -35,6 +35,7 @@ class MainWindowController: NSWindowController {
     override func windowDidLoad() {
         super.windowDidLoad()
         window?.isMovableByWindowBackground = true
+        window?.backgroundColor = NSColor.controlBackgroundColor
         modeSegmentedControl.selectSegment(withTag: 0)
         scaleSlider.doubleValue = Preferences.shared.scales(for: .column)
         
