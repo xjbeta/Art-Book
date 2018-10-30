@@ -836,7 +836,7 @@
                                             </constraints>
                                         </view>
                                     </tabViewItem>
-                                    <tabViewItem label="Content" identifier="Content" id="YN8-Aa-Dv6">
+                                    <tabViewItem label="Collection" identifier="Collection" id="YN8-Aa-Dv6" userLabel="Collection">
                                         <view key="view" id="NeS-dk-CfG">
                                             <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -868,6 +868,52 @@
                                                 <constraint firstAttribute="trailing" secondItem="Kv8-pS-o92" secondAttribute="trailing" id="bq6-Yh-yky"/>
                                                 <constraint firstItem="Kv8-pS-o92" firstAttribute="leading" secondItem="NeS-dk-CfG" secondAttribute="leading" id="pQp-zg-ezD"/>
                                                 <constraint firstItem="Kv8-pS-o92" firstAttribute="top" secondItem="NeS-dk-CfG" secondAttribute="top" id="yxs-DE-MOz"/>
+                                            </constraints>
+                                        </view>
+                                    </tabViewItem>
+                                    <tabViewItem label="Item 2" identifier="" id="eAH-g4-dnc" userLabel="Pages">
+                                        <view key="view" id="PfI-A6-llq">
+                                            <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jto-X0-h3y">
+                                                    <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
+                                                    <clipView key="contentView" id="aGi-jX-V0h">
+                                                        <rect key="frame" x="1" y="1" width="542" height="458"/>
+                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <subviews>
+                                                            <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qYw-Rp-FR3">
+                                                                <rect key="frame" x="0.0" y="0.0" width="542" height="458"/>
+                                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                                <subviews>
+                                                                    <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aT0-1I-CoF">
+                                                                        <rect key="frame" x="0.0" y="0.0" width="542" height="458"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                        <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" id="ohc-s2-YYr"/>
+                                                                    </imageView>
+                                                                    <progressIndicator wantsLayer="YES" fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="Auv-14-XNV">
+                                                                        <rect key="frame" x="20" y="8" width="502" height="20"/>
+                                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                                    </progressIndicator>
+                                                                </subviews>
+                                                            </view>
+                                                        </subviews>
+                                                    </clipView>
+                                                    <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="tUr-ce-VBO">
+                                                        <rect key="frame" x="1" y="443" width="542" height="16"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                    <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="9x8-Yk-Vep">
+                                                        <rect key="frame" x="527" y="1" width="16" height="458"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
+                                                    </scroller>
+                                                </scrollView>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Jto-X0-h3y" firstAttribute="leading" secondItem="PfI-A6-llq" secondAttribute="leading" id="9dk-YL-hE8"/>
+                                                <constraint firstItem="Jto-X0-h3y" firstAttribute="top" secondItem="PfI-A6-llq" secondAttribute="top" id="haI-qz-0AN"/>
+                                                <constraint firstAttribute="trailing" secondItem="Jto-X0-h3y" secondAttribute="trailing" id="tVc-Hu-UVQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Jto-X0-h3y" secondAttribute="bottom" id="wim-6b-iDc"/>
                                             </constraints>
                                         </view>
                                     </tabViewItem>

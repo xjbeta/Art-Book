@@ -15,6 +15,22 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         removeExpired()
+        
+//        do {
+//            var downloadsDirectory = try FileManager.default.url(for: .downloadsDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
+//            downloadsDirectory.resolveSymlinksInPath()
+//
+//            let t = AAPLFileTreeWatcherThread(path: downloadsDirectory.path) {
+//                print("ttt")
+//
+//            }
+//
+//            t.
+//            t.start()
+//
+//        } catch let error {
+//            print(error)
+//        }
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
