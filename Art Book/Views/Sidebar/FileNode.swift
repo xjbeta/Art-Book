@@ -52,13 +52,25 @@ class FileNode: NSObject {
     var imageRatio: CGFloat? {
         get {
             guard savedImageRatio == nil else { return savedImageRatio }
-            
-            if let url = self.url,
-                let image = NSImageRep(contentsOf: url) {
-                let imageSize = NSSize(width: image.pixelsWide, height: image.pixelsHigh)
-                let ratio = imageSize.width / imageSize.height
-                savedImageRatio = ratio
-                return ratio
+            guard let url = self.url else { return nil }
+            do {
+                let attrs = try FileManager.default.attributesOfItem(atPath: url.path) as NSDictionary
+                guard let date = attrs.fileModificationDate()?.timeIntervalSince1970 else { return nil }
+                
+                let key = url.path + " - " + "\(date)"
+                
+                if let ratio = ImageCache.ratio(forKey: key) {
+                    return ratio
+                } else if let image = NSImageRep(contentsOf: url) {
+                    let imageSize = NSSize(width: image.pixelsWide, height: image.pixelsHigh)
+                    let ratio = imageSize.width / imageSize.height
+                    ImageCache.setRatio(ratio, forKey: key)
+                    savedImageRatio = ratio
+                    return ratio
+                }
+            } catch let error {
+                print(error)
+                
             }
             return nil
         }

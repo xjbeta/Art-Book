@@ -10,17 +10,18 @@ import Cocoa
 import Cache
 
 class ImageCache: NSObject {
-    static let cacheName = "Image Cache"
+    static let imageCacheName = "Image Cache"
+    static let ratioCacheName = "Image Ratio Cache"
     
-    static let storage: DiskStorage<Image> = {
-        let config = DiskConfig(name: cacheName)
+    static let imageStorage: DiskStorage<Image> = {
+        let config = DiskConfig(name: imageCacheName)
         
         let storage = try! DiskStorage<Image>(config: config, transformer: TransformerFactory.forImage())
         return storage
     }()
     
     static func image(forKey key: String) -> Image? {
-        return try? ImageCache.storage.object(forKey: key)
+        return try? ImageCache.imageStorage.object(forKey: key)
     }
     
     static func setImage(_ image: Image, forKey key: String) {
@@ -32,7 +33,7 @@ class ImageCache: NSObject {
         }
         
         do {
-            try ImageCache.storage.setObject(image, forKey: key, expiry: expiry)
+            try ImageCache.imageStorage.setObject(image, forKey: key, expiry: expiry)
         } catch let error {
             print(error)
         }
@@ -41,7 +42,7 @@ class ImageCache: NSObject {
     static func cacheSize() -> String {
         do {
             var url = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
-            url.appendPathComponent(cacheName)
+            url.appendPathComponent(imageCacheName)
             print(url)
             
             var folderSize = 0
@@ -63,7 +64,28 @@ class ImageCache: NSObject {
     
     static func removeExpired() {
         do {
-            try ImageCache.storage.removeExpiredObjects()
+            try ImageCache.imageStorage.removeExpiredObjects()
+            try ImageCache.ratioStorage.removeExpiredObjects()
+        } catch let error {
+            print(error)
+        }
+    }
+    
+    
+    static let ratioStorage: DiskStorage<CGFloat> = {
+        let config = DiskConfig(name: ratioCacheName)
+        let storage = try! DiskStorage<CGFloat>(config: config, transformer: TransformerFactory.forCodable(ofType: CGFloat.self))
+        return storage
+    }()
+    
+    static func ratio(forKey key: String) -> CGFloat? {
+        return try? ImageCache.ratioStorage.object(forKey: key)
+    }
+    
+    static func setRatio(_ ratio: CGFloat, forKey key: String) {
+        let expiry = Expiry.seconds(3600 * 24 * 90)
+        do {
+            try ImageCache.ratioStorage.setObject(ratio, forKey: key, expiry: expiry)
         } catch let error {
             print(error)
         }
