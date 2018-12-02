@@ -12,6 +12,7 @@ import CollectionView
 
 class ImageItemCell: CollectionViewPreviewCell {
     
+    @IBOutlet weak var box: NSBox!
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var textField: NSTextField!
     
@@ -25,6 +26,7 @@ class ImageItemCell: CollectionViewPreviewCell {
 //    override var wantsUpdateLayer: Bool { return true }
     override func prepareForReuse() {
         super.prepareForReuse()
+        box.isHidden = true
         loadImageOperation?.cancel()
         token?.invalidate()
         url = nil
@@ -44,41 +46,29 @@ class ImageItemCell: CollectionViewPreviewCell {
                                 forCellWithReuseIdentifier: self.defaultReuseIdentifier)
     }
     
-
     
-
-//    override func viewWillMove(toSuperview newSuperview: NSView?) {
-//        super.viewWillMove(toSuperview: newSuperview)
-//        self.layer?.borderColor = NSColor(white: 0.9, alpha: 1).cgColor
-//    }
-
 //     MARK: - Selection & Highlighting
 //    -------------------------------------------------------------------------------
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        if selected {
-            self.backgroundColor = NSColor.windowBackgroundColor
-            self.layer?.cornerRadius = 5
-        } else {
-            self.backgroundColor = NSColor.clear
-            self.layer?.cornerRadius = 0
-        }
-        self.needsDisplay = true
+        setHighlight(selected)
     }
     
     override func setHighlighted(_ highlighted: Bool, animated: Bool) {
         super.setHighlighted(highlighted, animated: animated)
-
         guard !self.selected else { return }
-        
+        setHighlight(highlighted)
+    }
+    
+    func setHighlight(_ highlighted: Bool) {
         if highlighted {
-            self.backgroundColor = NSColor.windowBackgroundColor
-            self.layer?.cornerRadius = 5
+            self.textField.layer?.backgroundColor = NSColor.systemBlue.cgColor
+            self.textField.layer?.cornerRadius = 3
+            self.box.isHidden = false
         } else {
-            self.backgroundColor = NSColor.clear
-            self.layer?.cornerRadius = 0
+            self.textField.layer?.backgroundColor = nil
+            self.box.isHidden = true
         }
-        
         self.needsDisplay = true
     }
     
@@ -100,25 +90,10 @@ class ImageItemCell: CollectionViewPreviewCell {
     
     var markWidth: CGFloat = 0
     
-    
     func initUrl(_ url: URL) {
         self.url = url
         textField?.stringValue = url.lastPathComponent
     }
-    
-    
-    
-//    override var isSelected: Bool {
-//        get {
-//            return super.isSelected
-//        }
-//        set {
-//            super.isSelected = newValue
-//            backgroundBox.isHidden = newValue
-//        }
-//    }
-    
-    
     
     // NULL until metadata is loaded
     var previewImage: NSImage? {

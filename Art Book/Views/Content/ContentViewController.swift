@@ -45,6 +45,7 @@ class ContentViewController: NSViewController {
                 return layout
             case .list:
                 let layout = CollectionViewListLayout()
+                layout.interitemSpacing = 20
                 return layout
             }
         }
@@ -313,20 +314,6 @@ class ContentViewController: NSViewController {
 
 extension ContentViewController: CollectionViewDelegate, CollectionViewDataSource, CollectionViewDelegateColumnLayout, CollectionViewDelegateListLayout {
     func collectionView(_ collectionView: CollectionView, cellForItemAt indexPath: IndexPath) -> CollectionViewCell {
-        
-//        // If no child,
-//        guard let child = self.child(at: indexPath) else {
-//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "EmptyCell", for: indexPath) as! ListCell
-//            cell.style = .basic
-//            cell.titleLabel.alignment = .center
-//            cell.titleLabel.textColor = NSColor.lightGray
-//            cell.titleLabel.font = NSFont.boldSystemFont(ofSize: 24)
-//            cell.disableHighlight = true
-//            cell.titleLabel.stringValue = provider.showEmptyState ? "No data" : "Empty Section"
-//            return cell
-//        }
-        
-        
         let cell = ImageItemCell.deque(for: indexPath, in: collectionView) as! ImageItemCell
         guard let url = fileNode?.childrenImages[indexPath.item].url else { return cell }
         cell.initUrl(url)
@@ -347,9 +334,7 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     
     
     func collectionView(_ collectionView: CollectionView, layout collectionViewLayout: CollectionViewLayout, heightForItemAt indexPath: IndexPath) -> CGFloat {
-//        print(layout)
-        
-        guard let imageRatio = fileNode?.childrenImages[indexPath.item].imageRatio else { return 0 }
+        guard let node = fileNode?.childrenImages[indexPath.item] else { return 0 }
         
         if let l = collectionView.collectionViewLayout as? CollectionViewColumnLayout {
             let width = (collectionView.frame.width
@@ -357,14 +342,13 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
                 - l.sectionInset.left
                 - l.sectionInset.right) / CGFloat(l.columnCount)
                 - 16
-            return width / imageRatio + 52
-        }
-        else if let l = collectionView.collectionViewLayout as? CollectionViewListLayout {
+            return imageViewHeight(width, node: node)
+        } else if let l = collectionView.collectionViewLayout as? CollectionViewListLayout {
             let width = (collectionView.frame.width
                 - l.sectionInsets.left
                 - l.sectionInsets.right)
                 - 16
-            return width / imageRatio + 52
+            return imageViewHeight(width, node: node)
         }
         return 0
     }
@@ -381,6 +365,21 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     
     func collectionView(_ collectionView: CollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         reloadPreviewPanel()
+    }
+    
+    func imageViewHeight(_ width: CGFloat, node: FileNode) -> CGFloat {
+        guard let imageRatio = node.imageRatio else { return 0 }
+        var height = width / imageRatio
+        
+        let textFiled = NSTextFieldCell()
+        textFiled.font = NSFont.systemFont(ofSize: 13)
+        textFiled.stringValue = node.url?.lastPathComponent ?? ""
+        let textHeight = textFiled.cellSize(forBounds: NSRect(x: 0, y: 0, width: width, height: 32)).height
+
+        height += textHeight
+        height += 22
+        
+        return height
     }
 }
 
