@@ -124,25 +124,20 @@ class ContentViewController: NSViewController {
 //        }
     }
     
-    
-
-    
     func updateScale(_ animated: Bool) {
         let scale = CGFloat(Preferences.shared.scales(for: viewMode))
         let width = baseWidth * CGFloat(scale + 0.2) * 2.5
         let layout = collectionView.collectionViewLayout
-        
+
         if let l = layout as? CollectionViewColumnLayout {
             l.columnCount = Int(collectionView.frame.width / baseWidth / (1 + scale))
-            self.collectionView.reloadLayout(animated)
         } else if let l = layout as? CollectionViewFlowLayout {
             l.defaultItemStyle = .flow(NSSize(width: width, height: width))
-            self.collectionView.reloadLayout(animated)
         } else if let l = layout as? CollectionViewListLayout {
             let width = self.collectionView.frame.width * (0.5 - scale / 2) / 2
             l.sectionInsets = NSEdgeInsets(top: 0, left: width, bottom: 0, right: width)
-            self.collectionView.reloadLayout(animated, scrollPosition: CollectionViewScrollPosition.centered) { _ in }
         }
+        self.collectionView.reloadLayout(animated, scrollPosition: .nearest)
     }
     
     func filesObserver() {
@@ -365,6 +360,13 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     
     func collectionView(_ collectionView: CollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         reloadPreviewPanel()
+    }
+    
+    func collectionViewLayoutAnchor(_ collectionView: CollectionView) -> IndexPath? {
+        let indexPaths = collectionView.indexPathsForVisibleItems
+        let index = indexPaths.count / 2
+        guard index >= 0, index < indexPaths.count else { return nil }
+        return indexPaths[index]
     }
     
     func imageViewHeight(_ width: CGFloat, node: FileNode) -> CGFloat {
