@@ -54,16 +54,17 @@ class ContentViewController: NSViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let layout = self.layout
+        updateScale(layout)
         collectionView.collectionViewLayout = layout
         collectionView.allowsMultipleSelection = false
         collectionView.dataSource = self
         collectionView.delegate = self
         
-        updateScale(false)
-        
         frameObserve = collectionView.observe(\.frame) { view, _ in
             if view.collectionViewLayout is CollectionViewColumnLayout {
-                self.updateScale(false)
+                self.updateScale(self.collectionView.collectionViewLayout)
+                self.collectionView.reloadLayout(false, scrollPosition: .nearest)
             }
         }
 
@@ -82,14 +83,17 @@ class ContentViewController: NSViewController {
             if let userInfo = $0.userInfo as? [String: ViewMode],
                 let viewMode = userInfo["viewMode"] {
                 self.viewMode = viewMode
-                self.collectionView.collectionViewLayout = self.layout
-                self.updateScale(true)
+                let layout = self.layout
+                self.updateScale(layout)
+                self.collectionView.collectionViewLayout = layout
+                self.collectionView.reloadLayout(true, scrollPosition: .nearest)
                 self.reloadPreviewPanel()
             }
         }
         
         NotificationCenter.default.addObserver(forName: .scaleDidChange, object: nil, queue: .main) { _ in
-            self.updateScale(false)
+            self.updateScale(self.collectionView.collectionViewLayout)
+            self.collectionView.reloadLayout(false, scrollPosition: .nearest)
         }
         
         // check scrollView Magnification limit
@@ -124,10 +128,9 @@ class ContentViewController: NSViewController {
 //        }
     }
     
-    func updateScale(_ animated: Bool) {
+    func updateScale(_ layout: CollectionViewLayout) {
         let scale = CGFloat(Preferences.shared.scales(for: viewMode))
         let width = baseWidth * CGFloat(scale + 0.2) * 2.5
-        let layout = collectionView.collectionViewLayout
 
         if let l = layout as? CollectionViewColumnLayout {
             l.columnCount = Int(collectionView.frame.width / baseWidth / (1 + scale))
@@ -137,7 +140,6 @@ class ContentViewController: NSViewController {
             let width = self.collectionView.frame.width * (0.5 - scale / 2) / 2
             l.sectionInsets = NSEdgeInsets(top: 0, left: width, bottom: 0, right: width)
         }
-        self.collectionView.reloadLayout(animated, scrollPosition: .nearest)
     }
     
     func filesObserver() {
@@ -363,10 +365,12 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     }
     
     func collectionViewLayoutAnchor(_ collectionView: CollectionView) -> IndexPath? {
-        let indexPaths = collectionView.indexPathsForVisibleItems
+        if let i = collectionView.indexPathsForSelectedItems.first {
+            return i
+        }
+        let indexPaths = collectionView.indexPathsForVisibleItems.sorted()
         let index = indexPaths.count / 2
-        guard index >= 0, index < indexPaths.count else { return nil }
-        return indexPaths[index]
+        return indexPaths.first?._item == 0 ? indexPaths.first : indexPaths[safe: index]
     }
     
     func imageViewHeight(_ width: CGFloat, node: FileNode) -> CGFloat {
