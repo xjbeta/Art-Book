@@ -28,6 +28,7 @@
 		0147300721609F8600F658A6 /* FileNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0147300621609F8600F658A6 /* FileNode.swift */; };
 		014730092160A3B800F658A6 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014730082160A3B800F658A6 /* MainWindowController.swift */; };
 		01612E5021B7FA59003B43AC /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01612E4F21B7FA59003B43AC /* SafeSubscript.swift */; };
+		0169097C21BB6AD8008CDF0E /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169097B21BB6AD8008CDF0E /* Log.swift */; };
 		016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3C99216058D1005515E0 /* AppDelegate.swift */; };
 		016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9D216058D2005515E0 /* Assets.xcassets */; };
 		016A3CA1216058D2005515E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9F216058D2005515E0 /* Main.storyboard */; };
@@ -81,6 +82,7 @@
 		0147300621609F8600F658A6 /* FileNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileNode.swift; sourceTree = "<group>"; };
 		014730082160A3B800F658A6 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		01612E4F21B7FA59003B43AC /* SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
+		0169097B21BB6AD8008CDF0E /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
 		016A3C96216058D1005515E0 /* Art Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A3C99216058D1005515E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016A3C9D216058D2005515E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 				0102E9B22162513500460577 /* URLSecurityScope.swift */,
 				01174CB321762A1000A0C01C /* FileWatcher.swift */,
 				01612E4F21B7FA59003B43AC /* SafeSubscript.swift */,
+				0169097B21BB6AD8008CDF0E /* Log.swift */,
 				01473003216099B700F658A6 /* Views */,
 				01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */,
 			);
@@ -285,6 +288,7 @@
 			files = (
 				01612E5021B7FA59003B43AC /* SafeSubscript.swift in Sources */,
 				013B5AB421717E2A0042F26D /* ImageCache.swift in Sources */,
+				0169097C21BB6AD8008CDF0E /* Log.swift in Sources */,
 				0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */,
 				0102E9A02161FA7500460577 /* ContentViewController.swift in Sources */,
 				016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */,

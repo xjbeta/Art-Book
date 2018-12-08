@@ -76,7 +76,7 @@ class SidebarViewController: NSViewController {
             sidebarOutlineView.selectRowIndexes(IndexSet(integer: 1), byExtendingSelection: false)
 //            NotificationCenter.default.post(name: .sidebarSelectionDidChange, object: nil, userInfo: ["node": FileNode(url: downloadsDirectory)])
         } catch let error {
-            print(error)
+            Log(error)
         }
         guard Preferences.shared.favourites.count > 0 else { return }
         let favourites = FileNode(name: "Favourites", true)
@@ -84,7 +84,7 @@ class SidebarViewController: NSViewController {
         
         Preferences.shared.favourites.forEach {
             let re = $0.startAccessingSecurityScopedResource()
-            print("startAccessingSecurityScopedResource \(re)")
+            Log("startAccessingSecurityScopedResource \(re)")
             fileNodes.append(FileNode(url: $0))
         }
     }
@@ -147,16 +147,16 @@ class SidebarViewController: NSViewController {
                         currentNode.childrenDics.insert(newNode, at: index)
                     }
                 } else if event.dirModified {
-                    print("dirModified")
+                    Log("dirModified")
                     
                 } else if event.dirRemoved {
-                    print("dirRemoved")
+                    Log("dirRemoved")
                     
                 } else if event.fileRemoved || event.fileModified || event.fileChange || event.fileCreated || event.fileRenamed {
                     return
                 } else {
-                    print("Unknown file watcher event.")
-                    print(event.description)
+                    Log("Unknown file watcher event.")
+                    Log(event.description)
                 }
                 
                 

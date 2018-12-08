@@ -107,15 +107,15 @@ class ContentViewController: NSViewController {
 //
 //                let size = self.imageBrowser.cellSize()
 //
-//                print(self.imageBrowser.zoomValue())
+//                Log(self.imageBrowser.zoomValue())
 //                self.imageBrowser.setZoomValue(2)
 //
 ////                std::exp(magnification)
 //                self.imageBrowser.needsDisplay = true
 //
-//                print(self.imageBrowser.frame)
+//                Log(self.imageBrowser.frame)
 //                self.imageBrowser.setFrameSize(self.scrollView!.frame.size)
-//                print(self.imageBrowser.frame)
+//                Log(self.imageBrowser.frame)
 //
 ////                guard !self.singleMode else { return }
 ////                self.fileCollectionView.visibleItems().forEach { item in
@@ -193,14 +193,14 @@ class ContentViewController: NSViewController {
                     cell.requestPreviewImage(true)
                 }
             } else if event.fileModified {
-                print("fileModified")
+                Log("fileModified")
             } else if event.fileRemoved {
-                print("fileRemoved")
+                Log("fileRemoved")
             } else if event.dirRemoved || event.dirModified || event.dirChange || event.dirCreated || event.dirRenamed {
                 return
             } else {
-                print("Unknown file watcher event.")
-                print(event.description)
+                Log("Unknown file watcher event.")
+                Log(event.description)
             }
         }
         

@@ -22,7 +22,7 @@ class URLSecurityScope: NSObject {
 //            let _ = url.startAccessingSecurityScopedResource()
             return url
         } catch {
-            print("resolveBookmarkError\(error)")
+            Log("resolveBookmarkError\(error)")
             return nil
         }
     }
@@ -34,7 +34,7 @@ class URLSecurityScope: NSObject {
                                             relativeTo: nil)
             return data
         } catch {
-            print("creatBookmarkError:\(error)")
+            Log("creatBookmarkError:\(error)")
             return nil
         }
     }

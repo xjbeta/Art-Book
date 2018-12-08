@@ -24,7 +24,7 @@ class FileNode: NSObject {
             nodes.sort { $0.name < $1.name }
             return nodes
         } catch let error {
-            print(error)
+            Log(error)
         }
         return []
     }()
@@ -43,7 +43,7 @@ class FileNode: NSObject {
             nodes.sort { $0.name < $1.name }
             return nodes
         } catch let error {
-            print(error)
+            Log(error)
         }
         return []
     }()
@@ -69,7 +69,7 @@ class FileNode: NSObject {
                     return ratio
                 }
             } catch let error {
-                print(error)
+                Log(error)
                 
             }
             return nil

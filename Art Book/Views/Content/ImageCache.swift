@@ -35,7 +35,7 @@ class ImageCache: NSObject {
         do {
             try ImageCache.imageStorage.setObject(image, forKey: key, expiry: expiry)
         } catch let error {
-            print(error)
+            Log(error)
         }
     }
     
@@ -43,7 +43,7 @@ class ImageCache: NSObject {
         do {
             var url = try FileManager.default.url(for: .cachesDirectory, in: .userDomainMask, appropriateFor: nil, create: false)
             url.appendPathComponent(imageCacheName)
-            print(url)
+            Log(url)
             
             var folderSize = 0
 
@@ -57,7 +57,7 @@ class ImageCache: NSObject {
             let sizeToDisplay = byteCountFormatter.string(for: folderSize) ?? ""
             return sizeToDisplay
         } catch let error {
-            print(error)
+            Log(error)
             return ""
         }
     }
@@ -67,7 +67,7 @@ class ImageCache: NSObject {
             try ImageCache.imageStorage.removeExpiredObjects()
             try ImageCache.ratioStorage.removeExpiredObjects()
         } catch let error {
-            print(error)
+            Log(error)
         }
     }
     
@@ -87,7 +87,7 @@ class ImageCache: NSObject {
         do {
             try ImageCache.ratioStorage.setObject(ratio, forKey: key, expiry: expiry)
         } catch let error {
-            print(error)
+            Log(error)
         }
     }
     
