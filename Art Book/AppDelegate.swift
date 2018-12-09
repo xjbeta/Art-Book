@@ -15,8 +15,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     lazy var logUrl: URL? = {
         do {
-            let documentDirectoryPath = try FileManager.default.url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-            let log = documentDirectoryPath.appendingPathComponent("Aria2D").appendingPathComponent("Aria2D.log")
+            let documentDirectoryPath = try FileManager.default.url(for: .libraryDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+            var log = documentDirectoryPath.appendingPathComponent("Logs").appendingPathComponent("ArtBook.log")
             return log
         } catch let error {
             Log(error)
