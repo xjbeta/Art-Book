@@ -18,7 +18,8 @@ class ImageItemCell: CollectionViewPreviewCell {
     
     var url: URL?
     private var imageSource: CGImageSource?
-    
+    private var token: NSKeyValueObservation?
+
     override func awakeFromNib() {
         super.awakeFromNib()
     }
@@ -27,10 +28,12 @@ class ImageItemCell: CollectionViewPreviewCell {
         super.prepareForReuse()
         box.isHidden = true
         loadImageOperation?.cancel()
+        token?.invalidate()
         url = nil
         imageSource = nil
         previewImage = nil
         markWidth = 0
+        token = nil
     }
     
 
@@ -74,7 +77,15 @@ class ImageItemCell: CollectionViewPreviewCell {
         willSet {
             if newValue {
                 requestPreviewImage()
+                token = imageView?.observe(\.frame) { [weak self] imageView, _ in
+                    guard imageView.frame.width != 0, 
+                        imageView.frame.height != 0,
+                        let inLiveResize = self?.inLiveResize,
+                        !inLiveResize else { return }
+                    self?.requestPreviewImage()
+                }
             } else {
+                token?.invalidate()
                 loadImageOperation?.cancel()
             }
         }
