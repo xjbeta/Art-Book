@@ -43,9 +43,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func removeExpired() {
-        Log(ImageCache.cacheSize())
-        ImageCache.removeExpired()
-        Log(ImageCache.cacheSize())
+        Log(ImageCache.shared.cacheSize())
+        ImageCache.shared.removeExpired()
+        Log(ImageCache.shared.cacheSize())
     }
 }
 

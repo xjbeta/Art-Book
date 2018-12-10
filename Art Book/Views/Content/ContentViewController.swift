@@ -68,7 +68,7 @@ class ContentViewController: NSViewController {
             }
         }
 
-        collectionView.register(nib: NSNib(nibNamed: "ImageItemCell", bundle: nil)!, forCellWithReuseIdentifier: "ImageItemCell")
+        ImageItemCell.register(in: collectionView)
         
         NotificationCenter.default.addObserver(forName: .sidebarSelectionDidChange, object: nil, queue: .main) {
             if let userInfo = $0.userInfo as? [String: FileNode],

@@ -59,12 +59,12 @@ class FileNode: NSObject {
                 
                 let key = url.path + " - " + "\(date)"
                 
-                if let ratio = ImageCache.ratio(forKey: key) {
+                if let ratio = ImageCache.shared.ratio(forKey: key) {
                     return ratio
                 } else if let image = NSImageRep(contentsOf: url) {
                     let imageSize = NSSize(width: image.pixelsWide, height: image.pixelsHigh)
                     let ratio = imageSize.width / imageSize.height
-                    ImageCache.setRatio(ratio, forKey: key)
+                    ImageCache.shared.setRatio(ratio, forKey: key)
                     savedImageRatio = ratio
                     return ratio
                 }

@@ -18,7 +18,6 @@ class ImageItemCell: CollectionViewPreviewCell {
     
     var url: URL?
     private var imageSource: CGImageSource?
-    private var token: NSKeyValueObservation?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,11 +27,9 @@ class ImageItemCell: CollectionViewPreviewCell {
         super.prepareForReuse()
         box.isHidden = true
         loadImageOperation?.cancel()
-        token?.invalidate()
         url = nil
         imageSource = nil
         previewImage = nil
-        token = nil
         markWidth = 0
     }
     
@@ -77,15 +74,17 @@ class ImageItemCell: CollectionViewPreviewCell {
         willSet {
             if newValue {
                 requestPreviewImage()
-                token = imageView?.observe(\.frame) { [weak self] imageView, _ in
-                    guard imageView.frame.width != 0, imageView.frame.height != 0 else { return }
-                    self?.requestPreviewImage()
-                }
             } else {
                 loadImageOperation?.cancel()
-                token?.invalidate()
             }
         }
+    }
+    
+    override func viewDidEndLiveResize() {
+        super.viewDidEndLiveResize()
+        guard imageView.frame.width != 0,
+            imageView.frame.height != 0 else { return }
+        requestPreviewImage()
     }
     
     var markWidth: CGFloat = 0
@@ -143,7 +142,7 @@ class ImageItemCell: CollectionViewPreviewCell {
             cacheKey += "\(date)"
         }
         
-        if let image = ImageCache.image(forKey: cacheKey) {
+        if let image = ImageCache.shared.image(forKey: cacheKey) {
             previewImage = image
             return
         }
@@ -172,7 +171,7 @@ class ImageItemCell: CollectionViewPreviewCell {
                 
                 
                 let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
-                ImageCache.setImage(image, forKey: cacheKey)
+                ImageCache.shared.setImage(image, forKey: cacheKey)
                 OperationQueue.main.addOperation { [weak self] in
                     guard url == self?.url,
                         let newWidth = self?.imageView.frame.width,
@@ -184,18 +183,10 @@ class ImageItemCell: CollectionViewPreviewCell {
             }
             
         }
-        
-        
-        type(of: self).imageLoadingQueue.addOperation(loadImageOperation!)
+        ImageCache.shared.imageLoadingQueue.addOperation(loadImageOperation!)
     }
     
-    private static var imageLoadingQueue: OperationQueue = {
-        let queue = OperationQueue()
-        queue.name = "CoverViewItem ImageView Loading Queue"
-        queue.maxConcurrentOperationCount = 2
-        return queue
-    }()
-    
+
     
     func fileModificationDate(url: URL) -> Date? {
         do {
