@@ -48,29 +48,28 @@ class FileNode: NSObject {
         return []
     }()
     
+    lazy var imageSource: CGImageSource? = {
+        guard let sourceURL = url,
+            let imageSource = CGImageSourceCreateWithURL(sourceURL as CFURL, nil),
+            let type = CGImageSourceGetType(imageSource) else { return nil }
+        return imageSource
+    }()
+    
     private var savedImageRatio: CGFloat?
     var imageRatio: CGFloat? {
         get {
             guard savedImageRatio == nil else { return savedImageRatio }
-            guard let url = self.url else { return nil }
-            do {
-                let attrs = try FileManager.default.attributesOfItem(atPath: url.path) as NSDictionary
-                guard let date = attrs.fileModificationDate()?.timeIntervalSince1970 else { return nil }
-                
-                let key = url.path + " - " + "\(date)"
-                
-                if let ratio = ImageCache.shared.ratio(forKey: key) {
-                    return ratio
-                } else if let image = NSImageRep(contentsOf: url) {
-                    let imageSize = NSSize(width: image.pixelsWide, height: image.pixelsHigh)
-                    let ratio = imageSize.width / imageSize.height
-                    ImageCache.shared.setRatio(ratio, forKey: key)
-                    savedImageRatio = ratio
-                    return ratio
-                }
-            } catch let error {
-                Log(error)
-                
+            guard let url = self.url,
+                let date = url.fileModificationDate() else { return nil }
+            let key = url.path + " - " + "\(date)"
+            if let ratio = ImageCache.shared.ratio(forKey: key) {
+                return ratio
+            } else if let image = NSImageRep(contentsOf: url) {
+                let imageSize = NSSize(width: image.pixelsWide, height: image.pixelsHigh)
+                let ratio = imageSize.width / imageSize.height
+                ImageCache.shared.setRatio(ratio, forKey: key)
+                savedImageRatio = ratio
+                return ratio
             }
             return nil
         }
@@ -109,5 +108,14 @@ extension URL {
         let fileExtension = self.pathExtension
         let fileUTI:Unmanaged<CFString>! = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, fileExtension as CFString, nil)
         return UTTypeConformsTo(fileUTI.takeUnretainedValue(), kUTTypeImage)
+    }
+    
+    func fileModificationDate() -> Date? {
+        do {
+            let attr = try FileManager.default.attributesOfItem(atPath: path)
+            return attr[FileAttributeKey.modificationDate] as? Date
+        } catch {
+            return nil
+        }
     }
 }

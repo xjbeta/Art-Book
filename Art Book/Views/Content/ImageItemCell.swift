@@ -16,8 +16,7 @@ class ImageItemCell: CollectionViewPreviewCell {
     @IBOutlet weak var imageView: NSImageView!
     @IBOutlet weak var textField: NSTextField!
     
-    var url: URL?
-    private var imageSource: CGImageSource?
+    var node: FileNode?
     private var token: NSKeyValueObservation?
 
     override func awakeFromNib() {
@@ -29,8 +28,7 @@ class ImageItemCell: CollectionViewPreviewCell {
         box.isHidden = true
         loadImageOperation?.cancel()
         token?.invalidate()
-        url = nil
-        imageSource = nil
+        node = nil
         previewImage = nil
         markWidth = 0
         token = nil
@@ -100,9 +98,9 @@ class ImageItemCell: CollectionViewPreviewCell {
     
     var markWidth: CGFloat = 0
     
-    func initUrl(_ url: URL) {
-        self.url = url
-        textField?.stringValue = url.lastPathComponent
+    func initNode(_ node: FileNode) {
+        self.node = node
+        textField?.stringValue = node.url?.lastPathComponent ?? ""
     }
     
     // NULL until metadata is loaded
@@ -116,25 +114,9 @@ class ImageItemCell: CollectionViewPreviewCell {
     
     //MARK: Loading
     
-    private func createImageSource() -> Bool {
-        
-        guard imageSource == nil, let sourceURL = self.url else { return true }
-        
-        guard let imageSource = CGImageSourceCreateWithURL(sourceURL as CFURL, nil) else {
-            return false
-        }
-        
-        guard let _ = CGImageSourceGetType(imageSource) else {
-            return false
-        }
-        
-        self.imageSource = imageSource
-        return true
-    }
-    
     func requestPreviewImage(_ update: Bool = false) {
         if update {
-            imageSource = nil
+            node?.imageSource = nil
         } else {
             guard markWidth != imageView.frame.width - 8 else { return }
             markWidth = imageView.frame.width - 8
@@ -142,14 +124,15 @@ class ImageItemCell: CollectionViewPreviewCell {
 
         loadImageOperation?.cancel()
         
-        guard let scale = NSScreen.main?.backingScaleFactor, let url = self.url else {
+        guard let scale = NSScreen.main?.backingScaleFactor,
+            let url = self.node?.url else {
             return
         }
         
         let maxPixelSize = (Int(markWidth * scale / 100) + 1) * 100
         var cacheKey = "\(url.absoluteString) - \(maxPixelSize) - "
         
-        if let date = fileModificationDate(url: url) {
+        if let date = url.fileModificationDate() {
             cacheKey += "\(date)"
         }
         
@@ -163,9 +146,7 @@ class ImageItemCell: CollectionViewPreviewCell {
         loadImageOperation?.addExecutionBlock { [weak self] in
             
             autoreleasepool {
-                guard let re = self?.createImageSource(),
-                    re,
-                    let imageSource = self?.imageSource else { return }
+                guard let imageSource = self?.node?.imageSource else { return }
                 
                 let options: [AnyHashable: Any] = [
                     // Ask ImageIO to create a thumbnail from the file's image data, if it can't find
@@ -184,7 +165,7 @@ class ImageItemCell: CollectionViewPreviewCell {
                 let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
                 ImageCache.shared.setImage(image, forKey: cacheKey)
                 OperationQueue.main.addOperation { [weak self] in
-                    guard url == self?.url,
+                    guard url == self?.node?.url,
                         let newWidth = self?.imageView.frame.width,
                         self?.markWidth == newWidth - 8 else { return }
                     self?.previewImage = image
@@ -195,17 +176,6 @@ class ImageItemCell: CollectionViewPreviewCell {
             
         }
         ImageCache.shared.imageLoadingQueue.addOperation(loadImageOperation!)
-    }
-    
-
-    
-    func fileModificationDate(url: URL) -> Date? {
-        do {
-            let attr = try FileManager.default.attributesOfItem(atPath: url.path)
-            return attr[FileAttributeKey.modificationDate] as? Date
-        } catch {
-            return nil
-        }
     }
 }
 

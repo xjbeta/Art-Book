@@ -312,8 +312,8 @@ class ContentViewController: NSViewController {
 extension ContentViewController: CollectionViewDelegate, CollectionViewDataSource, CollectionViewDelegateColumnLayout, CollectionViewDelegateListLayout {
     func collectionView(_ collectionView: CollectionView, cellForItemAt indexPath: IndexPath) -> CollectionViewCell {
         let cell = ImageItemCell.deque(for: indexPath, in: collectionView) as! ImageItemCell
-        guard let url = fileNode?.childrenImages[indexPath.item].url else { return cell }
-        cell.initUrl(url)
+        guard let node = fileNode?.childrenImages[indexPath.item] else { return cell }
+        cell.initNode(node)
         return cell
     }
 
@@ -333,21 +333,8 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
     func collectionView(_ collectionView: CollectionView, layout collectionViewLayout: CollectionViewLayout, heightForItemAt indexPath: IndexPath) -> CGFloat {
         guard let node = fileNode?.childrenImages[indexPath.item] else { return 0 }
         
-        if let l = collectionView.collectionViewLayout as? CollectionViewColumnLayout {
-            let width = (collectionView.frame.width
-                - CGFloat(l.columnCount - 1) * l.interitemSpacing
-                - l.sectionInset.left
-                - l.sectionInset.right) / CGFloat(l.columnCount)
-                - 16
-            return imageViewHeight(width, node: node)
-        } else if let l = collectionView.collectionViewLayout as? CollectionViewListLayout {
-            let width = (collectionView.frame.width
-                - l.sectionInsets.left
-                - l.sectionInsets.right)
-                - 16
-            return imageViewHeight(width, node: node)
-        }
-        return 0
+        guard let width = imageViewWidth() else { return 0 }
+        return imageViewHeight(width, node: node)
     }
     
     func collectionView(_ collectionView: CollectionView, willDisplayCell cell: CollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -371,6 +358,30 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
         let indexPaths = collectionView.indexPathsForVisibleItems.sorted()
         let index = indexPaths.count / 2
         return indexPaths.first?._item == 0 ? indexPaths.first : indexPaths[safe: index]
+    }
+    
+    func imageViewWidth() -> CGFloat? {
+        if let l = collectionView.collectionViewLayout as? CollectionViewColumnLayout {
+            return (collectionView.frame.width
+                - CGFloat(l.columnCount - 1) * l.interitemSpacing
+                - l.sectionInset.left
+                - l.sectionInset.right) / CGFloat(l.columnCount)
+                - 16
+            
+        } else if let l = collectionView.collectionViewLayout as? CollectionViewListLayout {
+            return (collectionView.frame.width
+                - l.sectionInsets.left
+                - l.sectionInsets.right)
+                - 16
+        } else if let l = collectionView.collectionViewLayout as? CollectionViewFlowLayout {
+            switch l.defaultItemStyle {
+            case .flow(let size):
+                return size.width - 16
+            default:
+                break
+            }
+        }
+        return nil
     }
     
     func imageViewHeight(_ width: CGFloat, node: FileNode) -> CGFloat {
