@@ -97,4 +97,8 @@ class ImageCache: NSObject {
         ratiosDic[key] = ratio
     }
     
+    func saveRatios() {
+        try? ratioStorage.setObject(ratiosDic, forKey: ratioCacheName)
+    }
+    
 }

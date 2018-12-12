@@ -48,12 +48,18 @@ class FileNode: NSObject {
         return []
     }()
     
-    lazy var imageSource: CGImageSource? = {
-        guard let sourceURL = url,
-            let imageSource = CGImageSourceCreateWithURL(sourceURL as CFURL, nil),
-            let type = CGImageSourceGetType(imageSource) else { return nil }
-        return imageSource
-    }()
+    private var savedImageSource: CGImageSource?
+    var imageSource: CGImageSource? {
+        get {
+            guard savedImageSource == nil else { return savedImageSource }
+            
+            guard let sourceURL = url,
+                let imageSource = CGImageSourceCreateWithURL(sourceURL as CFURL, nil),
+                let _ = CGImageSourceGetType(imageSource) else { return nil }
+            savedImageSource = imageSource
+            return imageSource
+        }
+    }
     
     private var savedImageRatio: CGFloat?
     var imageRatio: CGFloat? {

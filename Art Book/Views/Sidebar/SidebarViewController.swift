@@ -217,6 +217,7 @@ extension SidebarViewController: NSOutlineViewDelegate, NSOutlineViewDataSource 
     }
     
     func outlineViewSelectionDidChange(_ notification: Notification) {
+        ImageCache.shared.saveRatios()
         guard let item = (sidebarOutlineView.item(atRow: sidebarOutlineView.selectedRow) as? NSTreeNode)?.representedObject as? FileNode else {
             return
         }

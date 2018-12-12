@@ -39,6 +39,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
+        ImageCache.shared.saveRatios()
         removeExpired()
     }
     
