@@ -314,6 +314,7 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
         let cell = ImageItemCell.deque(for: indexPath, in: collectionView) as! ImageItemCell
         guard let node = fileNode?.childrenImages[indexPath.item] else { return cell }
         cell.initNode(node)
+        cell.isDisplaying = true
         return cell
     }
 
@@ -337,11 +338,6 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
         return imageViewHeight(width, node: node)
     }
     
-    func collectionView(_ collectionView: CollectionView, willDisplayCell cell: CollectionViewCell, forItemAt indexPath: IndexPath) {
-        guard let cell = cell as? ImageItemCell else { return }
-        cell.isDisplaying = true
-    }
-
     func collectionView(_ collectionView: CollectionView, didEndDisplayingCell cell: CollectionViewCell, forItemAt indexPath: IndexPath) {
         guard let cell = cell as? ImageItemCell else { return }
         cell.isDisplaying = false
