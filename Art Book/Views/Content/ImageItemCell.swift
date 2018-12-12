@@ -116,7 +116,7 @@ class ImageItemCell: CollectionViewPreviewCell {
     
     func requestPreviewImage(_ update: Bool = false) {
         if update {
-            node?.imageSource = nil
+            node?.savedImageSource = nil
         } else {
             guard markWidth != imageView.frame.width - 8 else { return }
             markWidth = imageView.frame.width - 8

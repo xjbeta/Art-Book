@@ -48,7 +48,7 @@ class FileNode: NSObject {
         return []
     }()
     
-    private var savedImageSource: CGImageSource?
+    var savedImageSource: CGImageSource?
     var imageSource: CGImageSource? {
         get {
             guard savedImageSource == nil else { return savedImageSource }
