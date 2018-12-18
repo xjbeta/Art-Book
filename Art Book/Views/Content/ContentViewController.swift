@@ -12,12 +12,40 @@ import Quartz
 
 class ContentViewController: NSViewController {
 
+    @IBOutlet var collectionViewMenu: NSMenu!
     @IBOutlet weak var collectionView: CollectionView!
     @IBOutlet weak var tabView: NSTabView!
     
-    @IBOutlet var collectionMenu: NSMenu!
-    var frameObserve: NSKeyValueObservation?
+    @IBOutlet weak var applicationListMenu: NSMenu!
     
+// MARK: - Menu Actions
+    @IBAction func open(_ sender: Any) {
+        guard let url = collectionViewSelectedUrl() else { return }
+        NSWorkspace.shared.openFile(url.path)
+    }
+    
+    @IBAction func openWithPreview(_ sender: Any) {
+        guard let url = collectionViewSelectedUrl() else { return }
+        NSWorkspace.shared.openFile(url.path, withApplication: "Preview.app")
+    }
+    
+    @IBAction func moveToTrash(_ sender: Any) {
+        guard let url = collectionViewSelectedUrl() else { return }
+        do {
+            try FileManager.default.trashItem(at: url, resultingItemURL: nil)
+        } catch let error {
+            print(error)
+        }
+        
+    }
+    
+    @IBAction func showInFinder(_ sender: Any) {
+        guard let url = collectionViewSelectedUrl() else { return }
+        NSWorkspace.shared.activateFileViewerSelecting([url])
+    }
+    
+// MARK: - Values
+    var frameObserve: NSKeyValueObservation?
     var fileWatcher: FileWatcher?
     var fileNode: FileNode? = nil {
         didSet {
@@ -60,6 +88,7 @@ class ContentViewController: NSViewController {
         collectionView.allowsMultipleSelection = false
         collectionView.dataSource = self
         collectionView.delegate = self
+        collectionView.menu = collectionViewMenu
         
         frameObserve = collectionView.observe(\.frame) { view, _ in
             if view.collectionViewLayout is CollectionViewColumnLayout {
@@ -308,6 +337,7 @@ class ContentViewController: NSViewController {
 //}
 
 
+// MARK: - Collection View Delegate & DataSource
 
 extension ContentViewController: CollectionViewDelegate, CollectionViewDataSource, CollectionViewDelegateColumnLayout, CollectionViewDelegateListLayout {
     func collectionView(_ collectionView: CollectionView, cellForItemAt indexPath: IndexPath) -> CollectionViewCell {
@@ -394,8 +424,15 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
         
         return height
     }
+    
+    func collectionViewSelectedUrl() -> URL? {
+        guard let indexPath = collectionView.indexPathForHighlightedItem,
+            let url = fileNode?.childrenImages[indexPath.item].url else { return nil }
+        return url
+    }
 }
 
+// MARK: - CollectionView PreViewPanel
 
 extension ContentViewController: QLPreviewPanelDelegate, QLPreviewPanelDataSource {
     
@@ -441,4 +478,69 @@ extension ContentViewController: QLPreviewPanelDelegate, QLPreviewPanelDataSourc
         }
         return true
     }
+}
+
+
+// MARK: - CollectionView Menu Delegate
+
+extension ContentViewController: NSMenuItemValidation, NSMenuDelegate {
+    public func validateMenuItem(_ menuItem: NSMenuItem) -> Bool {
+        if menuItem.action == #selector(moveToTrash) {
+            return false
+        }
+        return true
+    }
+    
+    public func menuWillOpen(_ menu: NSMenu) {
+        guard menu == applicationListMenu else { return }
+        menu.removeAllItems()
+        
+        guard let url = collectionViewSelectedUrl() else {
+                menu.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
+                return
+        }
+        
+        // Default App
+        if let defaultApp = LSCopyDefaultApplicationURLForURL(url as CFURL, .all, nil)?.takeRetainedValue() as URL? {
+            let item = menuItem(for: defaultApp)
+            item.title += " (Default)"
+            menu.addItem(item)
+        } else {
+            menu.addItem(NSMenuItem(title: "None", action: nil, keyEquivalent: ""))
+        }
+        
+        menu.addItem(NSMenuItem.separator())
+        
+        // Other App
+        if var apps = LSCopyApplicationURLsForURL(url as CFURL, .all)?.takeRetainedValue() as? [URL] {
+            apps.sort {
+                return $0.lastPathComponent.compare($1.lastPathComponent, options: .numeric) == .orderedAscending
+            }
+            apps.forEach {
+                menu.addItem(menuItem(for: $0))
+            }
+        }
+    }
+    
+    func menuItem(for url: URL) -> NSMenuItem {
+        let item = NSMenuItem(title: url.lastPathComponent, action: nil, keyEquivalent: "")
+        let image = NSWorkspace.shared.icon(forFile: url.path)
+        image.size = NSSize(width: 17, height: 17)
+        item.image = image
+        item.action = #selector(openWithApplications)
+        return item
+    }
+    
+    @objc func openWithApplications(_ sender: NSMenuItem) {
+        guard let url = collectionViewSelectedUrl() else { return }
+        var appName = sender.title
+        let endStr = " (Default)"
+        if appName.hasSuffix(endStr) {
+            let prefixIndex = appName.index(appName.startIndex, offsetBy: appName.count - endStr.count)
+            appName = String(appName[..<prefixIndex])
+        }
+        
+        NSWorkspace.shared.openFile(url.path, withApplication: appName, andDeactivate: true)
+    }
+    
 }

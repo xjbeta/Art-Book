@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14313.18"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -880,7 +880,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="544" height="460"/>
                                                     <clipView key="contentView" id="aGi-jX-V0h">
                                                         <rect key="frame" x="1" y="1" width="542" height="458"/>
-                                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                        <autoresizingMask key="autoresizingMask"/>
                                                         <subviews>
                                                             <view fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qYw-Rp-FR3">
                                                                 <rect key="frame" x="0.0" y="0.0" width="542" height="458"/>
@@ -928,24 +928,53 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="collectionMenu" destination="zso-uB-xcN" id="jnY-bZ-7ny"/>
+                        <outlet property="applicationListMenu" destination="vd5-Jk-rhE" id="kZV-8P-tUh"/>
                         <outlet property="collectionView" destination="Kv8-pS-o92" id="y74-8q-cYy"/>
+                        <outlet property="collectionViewMenu" destination="zso-uB-xcN" id="X7X-Mv-kk5"/>
                         <outlet property="tabView" destination="DXc-VQ-nzY" id="K91-A6-ORc"/>
                     </connections>
                 </viewController>
                 <customObject id="rnm-8A-xyl" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
                 <menu id="zso-uB-xcN">
                     <items>
-                        <menuItem title="Item 1" id="ogh-ea-9qt">
+                        <menuItem title="Open" id="vZ3-BB-ZYi">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="open:" target="IkO-vA-zKw" id="vLX-ks-MWZ"/>
+                            </connections>
                         </menuItem>
-                        <menuItem title="Item 2" id="7ra-0V-Q6P">
+                        <menuItem title="Open With Preview" id="r7l-4e-Y3B">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="openWithPreview:" target="IkO-vA-zKw" id="fZu-Wm-ekR"/>
+                            </connections>
                         </menuItem>
-                        <menuItem title="Item 3" id="ksO-Tv-aPT">
+                        <menuItem title="Open With" id="OHM-CB-qDM">
                             <modifierMask key="keyEquivalentModifierMask"/>
+                            <menu key="submenu" title="Open With" id="vd5-Jk-rhE">
+                                <connections>
+                                    <outlet property="delegate" destination="IkO-vA-zKw" id="0Jz-Ho-Y47"/>
+                                </connections>
+                            </menu>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="Z4I-ld-f1Y"/>
+                        <menuItem title="Move To Trash" enabled="NO" id="ksO-Tv-aPT">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="moveToTrash:" target="IkO-vA-zKw" id="CBc-Md-MnU"/>
+                            </connections>
+                        </menuItem>
+                        <menuItem isSeparatorItem="YES" id="zwf-K4-f8U"/>
+                        <menuItem title="Show In Finder" id="7ra-0V-Q6P">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="showInFinder:" target="IkO-vA-zKw" id="cQ3-4Z-EbI"/>
+                            </connections>
                         </menuItem>
                     </items>
+                    <connections>
+                        <outlet property="delegate" destination="IkO-vA-zKw" id="ATJ-8j-pK9"/>
+                    </connections>
                 </menu>
             </objects>
             <point key="canvasLocation" x="178" y="1277"/>
