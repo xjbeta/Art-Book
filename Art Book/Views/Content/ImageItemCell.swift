@@ -30,7 +30,7 @@ class ImageItemCell: CollectionViewPreviewCell {
         token?.invalidate()
         node = nil
         previewImage = nil
-        markWidth = 0
+        markPixelSize = 0
         token = nil
     }
     
@@ -96,7 +96,7 @@ class ImageItemCell: CollectionViewPreviewCell {
         requestPreviewImage()
     }
     
-    var markWidth: CGFloat = 0
+    var markPixelSize: CGFloat = 0
     
     func initNode(_ node: FileNode) {
         self.node = node
@@ -115,26 +115,22 @@ class ImageItemCell: CollectionViewPreviewCell {
     //MARK: Loading
     
     func requestPreviewImage(_ update: Bool = false) {
+        guard let node = node, let url = node.url else { return }
+        
         if update {
-            node?.savedImageSource = nil
+            node.savedImageSource = nil
         } else {
-            guard markWidth != imageView.frame.width - 8 else { return }
-            markWidth = imageView.frame.width - 8
+            guard markPixelSize != node.maxPixelSize(imageView.frame.width - 8) else { return }
         }
 
         loadImageOperation?.cancel()
         
-        guard let scale = NSScreen.main?.backingScaleFactor,
-            let url = self.node?.url else {
-            return
-        }
+        markPixelSize = node.maxPixelSize(imageView.frame.width - 8)
         
-        let maxPixelSize = (Int(markWidth * scale / 100) + 1) * 100
-        var cacheKey = "\(url.absoluteString) - \(maxPixelSize) - "
+        var cacheKey = "\(url.absoluteString) - \(markPixelSize) - "
         
-        if let date = url.fileModificationDate() {
-            cacheKey += "\(date)"
-        }
+        guard let date = url.fileModificationDate() else { return }
+        cacheKey += "\(date)"
         
         if let image = ImageCache.shared.image(forKey: cacheKey) {
             previewImage = image
@@ -154,26 +150,20 @@ class ImageItemCell: CollectionViewPreviewCell {
                     // line if only existing thumbnails were desired for some reason (maybe to favor
                     // performance over being guaranteed a complete set of thumbnails).
                     kCGImageSourceCreateThumbnailFromImageAlways as AnyHashable: true,
-                    kCGImageSourceThumbnailMaxPixelSize as AnyHashable: maxPixelSize
+                    kCGImageSourceThumbnailMaxPixelSize as AnyHashable: self?.markPixelSize ?? 0
                 ]
-                
-                
                 guard let thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {return}
-                
-                
                 
                 let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
                 ImageCache.shared.setImage(image, forKey: cacheKey)
                 OperationQueue.main.addOperation { [weak self] in
                     guard url == self?.node?.url,
-                        let newWidth = self?.imageView.frame.width,
-                        self?.markWidth == newWidth - 8 else { return }
+                        date == url.fileModificationDate(),
+                        let realTimeWidth = self?.imageView.frame.width,
+                        self?.markPixelSize == node.maxPixelSize(realTimeWidth - 8) else { return }
                     self?.previewImage = image
                 }
-                
-                
             }
-            
         }
         ImageCache.shared.imageLoadingQueue.addOperation(loadImageOperation!)
     }

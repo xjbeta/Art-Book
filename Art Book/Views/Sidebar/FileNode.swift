@@ -107,6 +107,14 @@ class FileNode: NSObject {
             $0.name == name
             }.first
     }
+    
+    func maxPixelSize(_ width: CGFloat) -> CGFloat {
+        guard let scale = NSScreen.main?.backingScaleFactor,
+            let ratio = imageRatio else {
+            return 0
+        }
+        return CGFloat((Int(max(width, width / ratio) * scale / 100) + 1) * 100)
+    }
 }
 
 extension URL {
