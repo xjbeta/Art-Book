@@ -190,8 +190,7 @@ extension SidebarViewController: NSOutlineViewDelegate, NSOutlineViewDataSource 
         } else {
             if let view = outlineView.makeView(withIdentifier: NSUserInterfaceItemIdentifier("SidebarDataCell"), owner: self) as? NSTableCellView {
                 view.textField?.stringValue = node.name
-                let icon = NSWorkspace.shared.icon(forFile: node.url?.path ?? "")
-                view.imageView?.image = icon
+                view.imageView?.image = NSImage(named: NSImage.Name("FolderIcon"))
                 return view
             }
         }
@@ -205,7 +204,7 @@ extension SidebarViewController: NSOutlineViewDelegate, NSOutlineViewDataSource 
         if node.isHeader {
             return 17
         } else {
-            return 24
+            return 21
         }
     }
     

@@ -987,13 +987,13 @@
                         <rect key="frame" x="0.0" y="0.0" width="148" height="460"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="26" horizontalPageScroll="10" verticalLineScroll="26" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-i0-cOu">
+                            <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-i0-cOu">
                                 <rect key="frame" x="0.0" y="37" width="148" height="423"/>
                                 <clipView key="contentView" drawsBackground="NO" id="QGW-Pf-dNG">
                                     <rect key="frame" x="0.0" y="0.0" width="148" height="423"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
-                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="24" rowSizeStyle="automatic" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="1A8-dQ-bpc" id="G9S-Qo-OcY" customClass="SidebarOutlineView" customModule="Art_Book" customModuleProvider="target">
+                                        <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="21" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="1A8-dQ-bpc" id="G9S-Qo-OcY" customClass="SidebarOutlineView" customModule="Art_Book" customModuleProvider="target">
                                             <rect key="frame" x="0.0" y="0.0" width="148" height="423"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
@@ -1039,24 +1039,24 @@
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="SidebarDataCell" id="eW8-6t-gH5">
-                                                            <rect key="frame" x="1" y="20" width="145" height="24"/>
+                                                            <rect key="frame" x="1" y="20" width="145" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
-                                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="7" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7L-Bj-l0p">
-                                                                    <rect key="frame" x="3" y="3" width="139" height="18"/>
+                                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7L-Bj-l0p">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="142" height="17"/>
                                                                     <subviews>
-                                                                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="SCA-eV-Iz2">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="18" height="18"/>
+                                                                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="SCA-eV-Iz2" customClass="SideBarImageView" customModule="Art_Book" customModuleProvider="target">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="17" height="17"/>
                                                                             <constraints>
-                                                                                <constraint firstAttribute="height" constant="18" id="N6d-Kg-QFc"/>
-                                                                                <constraint firstAttribute="width" constant="18" id="nN1-Kv-eVe"/>
+                                                                                <constraint firstAttribute="height" constant="17" id="JjQ-IK-4hP"/>
+                                                                                <constraint firstAttribute="width" secondItem="SCA-eV-Iz2" secondAttribute="height" multiplier="1:1" id="faQ-5f-w3T"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" id="UKj-gX-un8"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="41b-Kg-efb">
-                                                                            <rect key="frame" x="23" y="1" width="118" height="17"/>
+                                                                            <rect key="frame" x="19" y="1" width="125" height="16"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ffZ-qS-3g2">
-                                                                                <font key="font" metaFont="system"/>
+                                                                                <font key="font" metaFont="system" size="12"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                                                 <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                                             </textFieldCell>
@@ -1077,7 +1077,7 @@
                                                             </subviews>
                                                             <constraints>
                                                                 <constraint firstItem="f7L-Bj-l0p" firstAttribute="centerY" secondItem="eW8-6t-gH5" secondAttribute="centerY" id="3JG-fQ-S1L"/>
-                                                                <constraint firstItem="f7L-Bj-l0p" firstAttribute="leading" secondItem="eW8-6t-gH5" secondAttribute="leading" constant="3" id="BAM-gX-SGy"/>
+                                                                <constraint firstItem="f7L-Bj-l0p" firstAttribute="leading" secondItem="eW8-6t-gH5" secondAttribute="leading" id="BAM-gX-SGy"/>
                                                                 <constraint firstAttribute="trailing" secondItem="f7L-Bj-l0p" secondAttribute="trailing" constant="3" id="Qp5-J2-SJa"/>
                                                             </constraints>
                                                             <connections>

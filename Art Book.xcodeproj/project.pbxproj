@@ -29,6 +29,7 @@
 		014730092160A3B800F658A6 /* MainWindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 014730082160A3B800F658A6 /* MainWindowController.swift */; };
 		01612E5021B7FA59003B43AC /* SafeSubscript.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01612E4F21B7FA59003B43AC /* SafeSubscript.swift */; };
 		0169097C21BB6AD8008CDF0E /* Log.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169097B21BB6AD8008CDF0E /* Log.swift */; };
+		0169097E21CF4429008CDF0E /* SideBarImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0169097D21CF4429008CDF0E /* SideBarImageView.swift */; };
 		016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3C99216058D1005515E0 /* AppDelegate.swift */; };
 		016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9D216058D2005515E0 /* Assets.xcassets */; };
 		016A3CA1216058D2005515E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9F216058D2005515E0 /* Main.storyboard */; };
@@ -83,6 +84,7 @@
 		014730082160A3B800F658A6 /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		01612E4F21B7FA59003B43AC /* SafeSubscript.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafeSubscript.swift; sourceTree = "<group>"; };
 		0169097B21BB6AD8008CDF0E /* Log.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Log.swift; sourceTree = "<group>"; };
+		0169097D21CF4429008CDF0E /* SideBarImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SideBarImageView.swift; sourceTree = "<group>"; };
 		016A3C96216058D1005515E0 /* Art Book.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Art Book.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		016A3C99216058D1005515E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		016A3C9D216058D2005515E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				01473004216099D500F658A6 /* SidebarViewController.swift */,
 				0102E9A72162274B00460577 /* SidebarOutlineView.swift */,
 				013B5AB7217205E70042F26D /* SidebarAddButton.swift */,
+				0169097D21CF4429008CDF0E /* SideBarImageView.swift */,
 				0147300621609F8600F658A6 /* FileNode.swift */,
 			);
 			path = Sidebar;
@@ -295,6 +298,7 @@
 				013B5AB8217205E70042F26D /* SidebarAddButton.swift in Sources */,
 				01473005216099D500F658A6 /* SidebarViewController.swift in Sources */,
 				01174CB421762A1000A0C01C /* FileWatcher.swift in Sources */,
+				0169097E21CF4429008CDF0E /* SideBarImageView.swift in Sources */,
 				0102E9A62162085A00460577 /* Identifiers.swift in Sources */,
 				0147300721609F8600F658A6 /* FileNode.swift in Sources */,
 				014730092160A3B800F658A6 /* MainWindowController.swift in Sources */,
