@@ -210,7 +210,7 @@ class ContentViewController: NSViewController {
                     $0.offset
                 }).first else {
                     let newNode = FileNode(url: url)
-                    if let index = self?.fileNode?.childrenImages.index(where: { $0.name > newNode.name }) {
+                    if let index = self?.fileNode?.childrenImages.firstIndex(where: { $0.name > newNode.name }) {
                         self?.fileNode?.childrenImages.insert(newNode, at: index)
                         self?.collectionView.insertItems(at: [IndexPath(item: index, section: 0)], animated: true)
                     }

@@ -143,7 +143,7 @@ class SidebarViewController: NSViewController {
                 
                 if event.dirCreated || event.dirRenamed {
                     let newNode = FileNode(url: url)
-                    if let index = currentNode.childrenDics.index(where: { $0.name > newNode.name }) {
+                    if let index = currentNode.childrenDics.firstIndex(where: { $0.name > newNode.name }) {
                         currentNode.childrenDics.insert(newNode, at: index)
                     }
                 } else if event.dirModified {
