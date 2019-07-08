@@ -103,6 +103,7 @@ class ContentViewController: NSViewController {
             if let userInfo = $0.userInfo as? [String: FileNode],
                 let node = userInfo["node"] {
                 self.fileNode = node
+                ImageCache.shared.cleanDics()
                 self.collectionView.reloadData()
                 self.reloadPreviewPanel()
             }
@@ -219,7 +220,7 @@ class ContentViewController: NSViewController {
                 let indexPath = IndexPath(item: index, section: 0)
                 self?.collectionView.reloadItems(at: [indexPath], animated: false)
                 if let cell = self?.collectionView.cellForItem(at: indexPath) as? ImageItemCell {
-                    cell.requestPreviewImage(true)
+                    cell.initImageView(true)
                 }
             } else if event.fileModified {
                 Log("fileModified")

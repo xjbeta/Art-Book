@@ -26,7 +26,7 @@ class ImageCache: NSObject {
         ratiosDic = (try? ratioStorage.object(forKey: ratioCacheName)) ?? [:]
         
         imageLoadingQueue = OperationQueue()
-        imageLoadingQueue.name = "CoverViewItem ImageView Loading Queue"
+        imageLoadingQueue.name = "com.xjbeta.Art Book.imageLoadingQueue"
     }
     
     let imageCacheName: String
@@ -37,6 +37,77 @@ class ImageCache: NSObject {
     var ratiosDic: [String: CGFloat]
     
     let imageLoadingQueue: OperationQueue
+    
+    @objc dynamic var imagesDic = NSMutableDictionary()
+    var imageSourcesDic = [String: CGImageSource]()
+    var loadImageOperations = [String: Operation]()
+    
+    func cleanDics() {
+        
+        imageLoadingQueue.cancelAllOperations()
+        imagesDic.removeAllObjects()
+    }
+    
+    func cleanFinishedOperations() {
+        loadImageOperations.filter {
+            $0.value.isCancelled || $0.value.isFinished
+            }.forEach {
+                loadImageOperations.removeValue(forKey: $0.key)
+        }
+    }
+    
+    
+    func requestPreviewImage(_ node: FileNode, _ width: CGFloat, _ update: Bool = false) {
+        DispatchQueue.global().async {
+            let imageCache = ImageCache.shared
+            guard let _ = node.url else { return }
+            Log("Start loading image \(node.url?.lastPathComponent ?? "")")
+            
+            let markPixelSize = node.maxPixelSize(width)
+            let cacheKey = node.cacheKey(markPixelSize)
+            
+            if update {
+                node.savedImageSource = nil
+                imageCache.imagesDic[cacheKey] = nil
+            }
+            
+            if imageCache.imagesDic[cacheKey] != nil {
+                Log("ImagesDic existed \(node.url?.lastPathComponent ?? "")")
+                return
+            }
+            
+            if let image = ImageCache.shared.image(forKey: cacheKey) {
+                imageCache.imagesDic[cacheKey] = image
+                Log("Return cached image \(node.url?.lastPathComponent ?? "")")
+                return
+            }
+            
+            let blockOperation = BlockOperation()
+//            imageCache.loadImageOperations[cacheKey] = blockOperation
+            
+            blockOperation.addExecutionBlock {
+                autoreleasepool {
+                    guard let imageSource = node.imageSource else { return }
+                    let options: [AnyHashable: Any] = [
+                        // Ask ImageIO to create a thumbnail from the file's image data, if it can't find
+                        // a suitable existing thumbnail image in the file.  We could comment out the following
+                        // line if only existing thumbnails were desired for some reason (maybe to favor
+                        // performance over being guaranteed a complete set of thumbnails).
+                        kCGImageSourceCreateThumbnailFromImageAlways as AnyHashable: true,
+                        kCGImageSourceThumbnailMaxPixelSize as AnyHashable: markPixelSize
+                    ]
+                    guard let thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {return}
+                    
+                    let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
+                    let imageCache = ImageCache.shared
+                    imageCache.setImage(image, forKey: cacheKey)
+                    imageCache.imagesDic[cacheKey] = image
+                    Log("Finish loading image \(node.url?.lastPathComponent ?? "")")
+                }
+            }
+            imageCache.imageLoadingQueue.addOperation(blockOperation)
+        }
+    }
     
     func image(forKey key: String) -> Image? {
         return try? imageStorage.object(forKey: key)

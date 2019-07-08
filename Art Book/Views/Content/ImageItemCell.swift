@@ -26,10 +26,9 @@ class ImageItemCell: CollectionViewPreviewCell {
     override func prepareForReuse() {
         super.prepareForReuse()
         box.isHidden = true
-        loadImageOperation?.cancel()
+//        loadImageOperation?.cancel()
         token?.invalidate()
         node = nil
-        previewImage = nil
         markPixelSize = 0
         token = nil
     }
@@ -74,26 +73,25 @@ class ImageItemCell: CollectionViewPreviewCell {
     var isDisplaying = false {
         willSet {
             if newValue {
-                requestPreviewImage()
                 token = imageView?.observe(\.frame) { [weak self] imageView, _ in
                     guard imageView.frame.width != 0, 
                         imageView.frame.height != 0,
                         let inLiveResize = self?.inLiveResize,
                         !inLiveResize else { return }
-                    self?.requestPreviewImage()
+                    self?.initImageView(true)
                 }
             } else {
                 token?.invalidate()
-                loadImageOperation?.cancel()
             }
         }
     }
     
     override func viewDidEndLiveResize() {
         super.viewDidEndLiveResize()
-        guard imageView.frame.width != 0,
+        guard let node = node,
+            imageView.frame.width != 0,
             imageView.frame.height != 0 else { return }
-        requestPreviewImage()
+        ImageCache.shared.requestPreviewImage(node, imageView.frame.width)
     }
     
     var markPixelSize: CGFloat = 0
@@ -101,71 +99,18 @@ class ImageItemCell: CollectionViewPreviewCell {
     func initNode(_ node: FileNode) {
         self.node = node
         textField?.stringValue = node.url?.lastPathComponent ?? ""
+        initImageView(true)
     }
     
-    // NULL until metadata is loaded
-    var previewImage: NSImage? {
-        didSet {
-            imageView.image = previewImage
+    func initImageView(_ requestImage: Bool = false) {
+        guard let node = node else { return }
+        let markPixelSize = node.maxPixelSize(imageView.frame.width)
+        let cacheKey = node.cacheKey(markPixelSize)
+        
+        imageView.bind(.value, to: ImageCache.shared, withKeyPath: "imagesDic.\(cacheKey)", options: [.continuouslyUpdatesValue: true])
+        if requestImage {
+            ImageCache.shared.requestPreviewImage(node, imageView.frame.width)
         }
-    }
-    
-    var loadImageOperation: BlockOperation?
-    
-    //MARK: Loading
-    
-    func requestPreviewImage(_ update: Bool = false) {
-        guard let node = node, let url = node.url else { return }
-        
-        if update {
-            node.savedImageSource = nil
-        } else {
-            guard markPixelSize != node.maxPixelSize(imageView.frame.width - 8) else { return }
-        }
-
-        loadImageOperation?.cancel()
-        
-        markPixelSize = node.maxPixelSize(imageView.frame.width - 8)
-        
-        var cacheKey = "\(url.absoluteString) - \(markPixelSize) - "
-        
-        guard let date = url.fileModificationDate() else { return }
-        cacheKey += "\(date)"
-        
-        if let image = ImageCache.shared.image(forKey: cacheKey) {
-            previewImage = image
-            return
-        }
-        
-        loadImageOperation = BlockOperation()
-        
-        loadImageOperation?.addExecutionBlock { [weak self] in
-            
-            autoreleasepool {
-                guard let imageSource = self?.node?.imageSource else { return }
-                
-                let options: [AnyHashable: Any] = [
-                    // Ask ImageIO to create a thumbnail from the file's image data, if it can't find
-                    // a suitable existing thumbnail image in the file.  We could comment out the following
-                    // line if only existing thumbnails were desired for some reason (maybe to favor
-                    // performance over being guaranteed a complete set of thumbnails).
-                    kCGImageSourceCreateThumbnailFromImageAlways as AnyHashable: true,
-                    kCGImageSourceThumbnailMaxPixelSize as AnyHashable: self?.markPixelSize ?? 0
-                ]
-                guard let thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {return}
-                
-                let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
-                ImageCache.shared.setImage(image, forKey: cacheKey)
-                OperationQueue.main.addOperation { [weak self] in
-                    guard url == self?.node?.url,
-                        date == url.fileModificationDate(),
-                        let realTimeWidth = self?.imageView.frame.width,
-                        self?.markPixelSize == node.maxPixelSize(realTimeWidth - 8) else { return }
-                    self?.previewImage = image
-                }
-            }
-        }
-        ImageCache.shared.imageLoadingQueue.addOperation(loadImageOperation!)
     }
 }
 
