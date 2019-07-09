@@ -17,11 +17,12 @@ class ImageCache: NSObject {
         imageCacheName = "Image Cache"
         ratioCacheName = "Image Ratio Cache"
         
-        let config = DiskConfig(name: imageCacheName)
-        imageStorage = try! DiskStorage<Image>(config: config, transformer: TransformerFactory.forImage())
+        let imageDiskStorage = try! DiskStorage<Image>(config: .init(name: imageCacheName), transformer: TransformerFactory.forImage())
+        let imageMemoryStorage = MemoryStorage<Image>(config: .init(expiry: .seconds(3600), countLimit: 50, totalCostLimit: 0))
+        imageStorage = HybridStorage<Image>(memoryStorage: imageMemoryStorage,
+                                            diskStorage: imageDiskStorage)
         
-        let config1 = DiskConfig(name: ratioCacheName)
-        ratioStorage = try! DiskStorage<[String: CGFloat]>(config: config1, transformer: TransformerFactory.forCodable(ofType: [String: CGFloat].self))
+        ratioStorage = try! DiskStorage<[String: CGFloat]>(config: .init(name: ratioCacheName), transformer: TransformerFactory.forCodable(ofType: [String: CGFloat].self))
         
         ratiosDic = (try? ratioStorage.object(forKey: ratioCacheName)) ?? [:]
         
@@ -32,15 +33,15 @@ class ImageCache: NSObject {
     let imageCacheName: String
     let ratioCacheName: String
     
-    let imageStorage: DiskStorage<Image>
+    let imageStorage: HybridStorage<Image>
     let ratioStorage: DiskStorage<[String: CGFloat]>
     var ratiosDic: [String: CGFloat]
     
     let imageLoadingQueue: OperationQueue
     
     @objc dynamic var imagesDic = NSMutableDictionary()
-    var imageSourcesDic = [String: CGImageSource]()
     var loadImageOperations = [String: Operation]()
+    var loadingImageIds = [String]()
     
     func cleanDics() {
         
@@ -76,15 +77,23 @@ class ImageCache: NSObject {
                 return
             }
             
-            if let image = ImageCache.shared.image(forKey: cacheKey) {
+            if let image = imageCache.image(forKey: cacheKey) {
                 imageCache.imagesDic[cacheKey] = image
                 Log("Return cached image \(node.url?.lastPathComponent ?? "")")
                 return
             }
             
             let blockOperation = BlockOperation()
-//            imageCache.loadImageOperations[cacheKey] = blockOperation
+            DispatchQueue.main.async {
+                imageCache.loadImageOperations[cacheKey] = blockOperation
+            }
             
+            guard !imageCache.loadingImageIds.contains(cacheKey) else {
+                Log("Image is loading \(node.url?.lastPathComponent ?? "")")
+                return
+            }
+            
+            imageCache.loadingImageIds.append(cacheKey)
             blockOperation.addExecutionBlock {
                 autoreleasepool {
                     guard let imageSource = node.imageSource else { return }
@@ -102,6 +111,9 @@ class ImageCache: NSObject {
                     let imageCache = ImageCache.shared
                     imageCache.setImage(image, forKey: cacheKey)
                     imageCache.imagesDic[cacheKey] = image
+                    DispatchQueue.main.async {
+                        imageCache.loadingImageIds.removeAll(where: { $0 == cacheKey })
+                    }
                     Log("Finish loading image \(node.url?.lastPathComponent ?? "")")
                 }
             }
