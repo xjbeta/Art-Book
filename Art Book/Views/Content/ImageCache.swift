@@ -39,14 +39,12 @@ class ImageCache: NSObject {
     
     let imageLoadingQueue: OperationQueue
     
-    @objc dynamic var imagesDic = NSMutableDictionary()
     var loadImageOperations = [String: Operation]()
     var loadingImageIds = [String]()
     
     func cleanDics() {
-        
         imageLoadingQueue.cancelAllOperations()
-        imagesDic.removeAllObjects()
+        imageStorage.removeAllKeyObservers()
     }
     
     func cleanFinishedOperations() {
@@ -69,17 +67,12 @@ class ImageCache: NSObject {
             
             if update {
                 node.savedImageSource = nil
-                imageCache.imagesDic[cacheKey] = nil
+                try? imageCache.imageStorage.removeObject(forKey: cacheKey)
             }
             
-            if imageCache.imagesDic[cacheKey] != nil {
+            if let exists = try? imageCache.imageStorage.existsObject(forKey: cacheKey),
+                exists {
                 Log("ImagesDic existed \(node.url?.lastPathComponent ?? "")")
-                return
-            }
-            
-            if let image = imageCache.image(forKey: cacheKey) {
-                imageCache.imagesDic[cacheKey] = image
-                Log("Return cached image \(node.url?.lastPathComponent ?? "")")
                 return
             }
             
@@ -109,9 +102,8 @@ class ImageCache: NSObject {
                     
                     let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
                     let imageCache = ImageCache.shared
-                    imageCache.setImage(image, forKey: cacheKey)
-                    imageCache.imagesDic[cacheKey] = image
                     DispatchQueue.main.async {
+                        imageCache.setImage(image, forKey: cacheKey)
                         imageCache.loadingImageIds.removeAll(where: { $0 == cacheKey })
                     }
                     Log("Finish loading image \(node.url?.lastPathComponent ?? "")")

@@ -9,6 +9,7 @@
 //import Foundation
 import Cocoa
 import CollectionView
+import Cache
 
 class ImageItemCell: CollectionViewPreviewCell {
     
@@ -17,20 +18,22 @@ class ImageItemCell: CollectionViewPreviewCell {
     @IBOutlet weak var textField: NSTextField!
     
     var node: FileNode?
-    private var token: NSKeyValueObservation?
-
+    private var imageViewObserver: NSKeyValueObservation?
+    private var token: ObservationToken?
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-//    override var wantsUpdateLayer: Bool { return true }
+
     override func prepareForReuse() {
         super.prepareForReuse()
         box.isHidden = true
-//        loadImageOperation?.cancel()
-        token?.invalidate()
+        imageView.image = nil
+        token?.cancel()
+        imageViewObserver?.invalidate()
         node = nil
         markPixelSize = 0
         token = nil
+        imageViewObserver = nil
     }
     
 
@@ -69,23 +72,6 @@ class ImageItemCell: CollectionViewPreviewCell {
         self.needsDisplay = true
     }
     
-
-    var isDisplaying = false {
-        willSet {
-            if newValue {
-                token = imageView?.observe(\.frame) { [weak self] imageView, _ in
-                    guard imageView.frame.width != 0, 
-                        imageView.frame.height != 0,
-                        let inLiveResize = self?.inLiveResize,
-                        !inLiveResize else { return }
-                    self?.initImageView(true)
-                }
-            } else {
-                token?.invalidate()
-            }
-        }
-    }
-    
     override func viewDidEndLiveResize() {
         super.viewDidEndLiveResize()
         guard let node = node,
@@ -99,15 +85,32 @@ class ImageItemCell: CollectionViewPreviewCell {
     func initNode(_ node: FileNode) {
         self.node = node
         textField?.stringValue = node.url?.lastPathComponent ?? ""
-        initImageView(true)
+        
+        imageViewObserver = imageView?.observe(\.frame, options: [.initial, .new]) { [weak self] imageView, _ in
+            guard imageView.frame.width != 0,
+                imageView.frame.height != 0,
+                let inLiveResize = self?.inLiveResize,
+                !inLiveResize else { return }
+            self?.initImageView(true)
+        }
     }
     
     func initImageView(_ requestImage: Bool = false) {
         guard let node = node else { return }
         let markPixelSize = node.maxPixelSize(imageView.frame.width)
         let cacheKey = node.cacheKey(markPixelSize)
+        imageView.image = ImageCache.shared.image(forKey: cacheKey)
+        token = ImageCache.shared.imageStorage.addObserver(self, forKey: cacheKey) { [weak self] observer, storage, change in
+            DispatchQueue.main.async {
+                switch change {
+                case .edit(_, let after):
+                    self?.imageView.image = after
+                case .remove:
+                    self?.imageView.image = nil
+                }
+            }
+        }
         
-        imageView.bind(.value, to: ImageCache.shared, withKeyPath: "imagesDic.\(cacheKey)", options: [.continuouslyUpdatesValue: true])
         if requestImage {
             ImageCache.shared.requestPreviewImage(node, imageView.frame.width)
         }
