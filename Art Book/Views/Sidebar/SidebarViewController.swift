@@ -62,7 +62,6 @@ class SidebarViewController: NSViewController {
         fileNodes = []
         let homes = FileNode(name: "Homes", true)
         fileNodes.append(homes)
-        
         do {
             var downloadsDirectory = try fileManager.url(for: .downloadsDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
             downloadsDirectory.resolveSymlinksInPath()
@@ -72,20 +71,18 @@ class SidebarViewController: NSViewController {
             fileNodes.append(FileNode(url: downloadsDirectory))
             fileNodes.append(FileNode(url: picturesDirectory))
             
-
-            
-
-            
             sidebarOutlineView.selectRowIndexes(IndexSet(integer: 1), byExtendingSelection: false)
 //            NotificationCenter.default.post(name: .sidebarSelectionDidChange, object: nil, userInfo: ["node": FileNode(url: downloadsDirectory)])
         } catch let error {
             Log(error)
         }
-        guard Preferences.shared.favourites.count > 0 else { return }
-        let favourites = FileNode(name: "Favourites", true)
-        fileNodes.append(favourites)
         
-        Preferences.shared.favourites.forEach {
+        let favourites = Preferences.shared.favourites
+        guard favourites.count > 0 else { return }
+        let favouritesNode = FileNode(name: "Favourites", true)
+        fileNodes.append(favouritesNode)
+        
+        favourites.forEach {
             let re = $0.startAccessingSecurityScopedResource()
             Log("startAccessingSecurityScopedResource \(re)")
             fileNodes.append(FileNode(url: $0))
