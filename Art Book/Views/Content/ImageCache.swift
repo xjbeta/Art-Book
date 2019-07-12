@@ -59,56 +59,53 @@ class ImageCache: NSObject {
     
     
     func requestPreviewImage(_ node: FileNode, _ width: CGFloat, _ update: Bool = false) {
-        DispatchQueue.global().async {
-            let imageCache = ImageCache.shared
-            guard let _ = node.url else { return }
-            
-            let markPixelSize = node.maxPixelSize(width)
-            let cacheKey = node.cacheKey(markPixelSize)
-            
-            if update {
-                node.savedImageSource = nil
-                try? imageCache.imageStorage.removeObject(forKey: cacheKey)
-            }
-            
-            guard !imageCache.loadingImageIds.contains(cacheKey) else {
-                return
-            }
-            
-            if let exists = try? imageCache.imageStorage.existsObject(forKey: cacheKey),
-                exists {
-                return
-            }
-            
-            let blockOperation = BlockOperation()
-            DispatchQueue.main.async {
-                imageCache.loadImageOperations[cacheKey] = blockOperation
-            }
-            
-            imageCache.loadingImageIds.append(cacheKey)
-            blockOperation.addExecutionBlock {
-                autoreleasepool {
-                    guard let imageSource = node.imageSource else { return }
-                    let options: [AnyHashable: Any] = [
-                        // Ask ImageIO to create a thumbnail from the file's image data, if it can't find
-                        // a suitable existing thumbnail image in the file.  We could comment out the following
-                        // line if only existing thumbnails were desired for some reason (maybe to favor
-                        // performance over being guaranteed a complete set of thumbnails).
-                        kCGImageSourceCreateThumbnailFromImageAlways as AnyHashable: true,
-                        kCGImageSourceThumbnailMaxPixelSize as AnyHashable: markPixelSize
-                    ]
-                    guard let thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {return}
-                    
-                    let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
-                    let imageCache = ImageCache.shared
-                    DispatchQueue.main.async {
-                        imageCache.setImage(image, forKey: cacheKey)
-                        imageCache.loadingImageIds.removeAll(where: { $0 == cacheKey })
-                    }
+        let imageCache = ImageCache.shared
+        guard let _ = node.url else { return }
+        
+        let markPixelSize = node.maxPixelSize(width)
+        let cacheKey = node.cacheKey(markPixelSize)
+        
+        if update {
+            node.savedImageSource = nil
+            try? imageCache.imageStorage.removeObject(forKey: cacheKey)
+        }
+        
+        guard !imageCache.loadingImageIds.contains(cacheKey) else {
+            return
+        }
+        
+        if let exists = try? imageCache.imageStorage.existsObject(forKey: cacheKey),
+            exists {
+            return
+        }
+        
+        let blockOperation = BlockOperation()
+        imageCache.loadImageOperations[cacheKey] = blockOperation
+        
+        imageCache.loadingImageIds.append(cacheKey)
+        
+        blockOperation.addExecutionBlock {
+            autoreleasepool {
+                guard let imageSource = node.imageSource else { return }
+                let options: [AnyHashable: Any] = [
+                    // Ask ImageIO to create a thumbnail from the file's image data, if it can't find
+                    // a suitable existing thumbnail image in the file.  We could comment out the following
+                    // line if only existing thumbnails were desired for some reason (maybe to favor
+                    // performance over being guaranteed a complete set of thumbnails).
+                    kCGImageSourceCreateThumbnailFromImageAlways as AnyHashable: true,
+                    kCGImageSourceThumbnailMaxPixelSize as AnyHashable: markPixelSize
+                ]
+                guard let thumbnail = CGImageSourceCreateThumbnailAtIndex(imageSource, 0, options as CFDictionary) else {return}
+                
+                let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
+                let imageCache = ImageCache.shared
+                DispatchQueue.main.async {
+                    imageCache.setImage(image, forKey: cacheKey)
+                    imageCache.loadingImageIds.removeAll(where: { $0 == cacheKey })
                 }
             }
-            imageCache.imageLoadingQueue.addOperation(blockOperation)
         }
+        imageCache.imageLoadingQueue.addOperation(blockOperation)
     }
     
     func image(forKey key: String) -> Image? {
