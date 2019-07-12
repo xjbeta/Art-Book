@@ -386,9 +386,6 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
             let s = newItem - preloadCount + 1 >= 0 ? newItem - preloadCount + 1 : 0
             let e = newItem < nodes.count ? newItem : nodes.count - 1
             let items = nodes[s...e]
-            print(items.map({ $0.name }))
-            
-            
             items.forEach {
                 ImageCache.shared.requestPreviewImage($0, width)
             }
@@ -397,7 +394,6 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
             let s = newItem < nodes.count ? newItem : nodes.count - 1
             let e = (newItem + preloadCount) < nodes.count ? (newItem + preloadCount) : nodes.count - 1
             let items = nodes[s...e]
-            print(items.map({ $0.name }))
             items.forEach {
                 ImageCache.shared.requestPreviewImage($0, width)
             }
