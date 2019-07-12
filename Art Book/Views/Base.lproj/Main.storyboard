@@ -1159,6 +1159,13 @@
                                 <action selector="removeFromSidebar:" target="veI-ro-lad" id="pbw-F6-Fqx"/>
                             </connections>
                         </menuItem>
+                        <menuItem isSeparatorItem="YES" id="1e2-cg-chr"/>
+                        <menuItem title="Add to Favourites" id="BcH-J4-Q7f">
+                            <modifierMask key="keyEquivalentModifierMask"/>
+                            <connections>
+                                <action selector="addToFavourites:" target="veI-ro-lad" id="8zX-kY-Ray"/>
+                            </connections>
+                        </menuItem>
                     </items>
                 </menu>
             </objects>

@@ -11,15 +11,18 @@ import Cocoa
 class SidebarViewController: NSViewController {
 
     let fileManager = FileManager.default
-    lazy var selectPanel = NSOpenPanel()
-    
-    @IBOutlet weak var sidebarOutlineView: NSOutlineView!
-    @IBOutlet weak var addFolder: NSButton!
-    @IBAction func addFolder(_ sender: NSButton) {
+    lazy var selectPanel: NSOpenPanel = {
+        let selectPanel = NSOpenPanel()
         selectPanel.allowsMultipleSelection = false
         selectPanel.canChooseDirectories = true
         selectPanel.canChooseFiles = false
         selectPanel.prompt = "Add"
+        return selectPanel
+    }()
+    
+    @IBOutlet weak var sidebarOutlineView: NSOutlineView!
+    @IBOutlet weak var addFolder: NSButton!
+    @IBAction func addFolder(_ sender: NSButton) {
         guard let window = self.view.window else { return }
         selectPanel.beginSheetModal(for: window) {
             guard $0 == .OK, let url = self.selectPanel.url else { return }
@@ -260,6 +263,19 @@ extension SidebarViewController: NSMenuItemValidation {
         initNodes()
     }
     
+    @IBAction func addToFavourites(_ sender: Any) {
+        guard let item = (sidebarOutlineView.item(atRow: sidebarOutlineView.clickedRow) as? NSTreeNode)?.representedObject as? FileNode,
+            let url = item.url else {
+                return
+        }
+        selectPanel.directoryURL = url
+        guard let window = self.view.window else { return }
+        selectPanel.beginSheetModal(for: window) {
+            guard $0 == .OK, let url = self.selectPanel.url else { return }
+            Preferences.shared.addFavourite(url)
+            self.initNodes()
+        }
+    }
 }
 
 
