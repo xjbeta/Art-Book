@@ -19,15 +19,22 @@ class Preferences: NSObject {
     
     var favourites: [URL] {
         get {
-            guard let favourites = defaults(.favourites) as? [String: Data] else { return [] }
+            guard var favourites = defaults(.favourites) as? [String: Data] else { return [] }
             let keys = favourites.keys.sorted()
+            var invalidKey = [String]()
             let urls = keys.compactMap { key -> URL? in
                 guard let data = favourites[key],
                     let url = URLSecurityScope.resolvingBookmark(data) else {
-                    return nil
+                        invalidKey.append(key)
+                        return nil
                 }
                 return url
             }
+            
+            invalidKey.forEach {
+                favourites[$0] = nil
+            }
+            defaultsSet(favourites, forKey: .favourites)
             return urls
         }
     }
