@@ -368,6 +368,44 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
         return imageViewHeight(width, node: node)
     }
     
+    func collectionView(_ collectionView: CollectionView, willDisplayCell cell: CollectionViewCell, forItemAt indexPath: IndexPath) {
+        let visibleIndexs = collectionView.indexPathsForVisibleItems.map { $0._item }
+        guard visibleIndexs.count > 0 else { return }
+        let preloading = true
+        guard preloading else { return }
+
+        let preloadCount = 5
+
+        let newItem = indexPath._item
+        guard let min = visibleIndexs.min(),
+            let max = visibleIndexs.max(),
+            let nodes = fileNode?.childrenImages,
+            let width = imageViewWidth() else { return }
+        if newItem < min {
+            // Preloading forward -
+            let s = newItem - preloadCount + 1 >= 0 ? newItem - preloadCount + 1 : 0
+            let e = newItem < nodes.count ? newItem : nodes.count - 1
+            let items = nodes[s...e]
+            print(items.map({ $0.name }))
+            
+            
+            items.forEach {
+                ImageCache.shared.requestPreviewImage($0, width)
+            }
+        } else if newItem > max {
+            // Preloading backwards +
+            let s = newItem < nodes.count ? newItem : nodes.count - 1
+            let e = (newItem + preloadCount) < nodes.count ? (newItem + preloadCount) : nodes.count - 1
+            let items = nodes[s...e]
+            print(items.map({ $0.name }))
+            items.forEach {
+                ImageCache.shared.requestPreviewImage($0, width)
+            }
+        } else {
+            // Preloading middle ?
+        }
+    }
+    
     func collectionView(_ collectionView: CollectionView, didSelectItemsAt indexPaths: Set<IndexPath>) {
         reloadPreviewPanel()
     }

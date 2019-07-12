@@ -45,6 +45,8 @@ class ImageCache: NSObject {
     func cleanDics() {
         imageLoadingQueue.cancelAllOperations()
         imageStorage.removeAllKeyObservers()
+        loadingImageIds.removeAll()
+        imageStorage.memoryStorage.removeAll()
     }
     
     func cleanFinishedOperations() {
@@ -60,7 +62,6 @@ class ImageCache: NSObject {
         DispatchQueue.global().async {
             let imageCache = ImageCache.shared
             guard let _ = node.url else { return }
-            Log("Start loading image \(node.url?.lastPathComponent ?? "")")
             
             let markPixelSize = node.maxPixelSize(width)
             let cacheKey = node.cacheKey(markPixelSize)
@@ -70,20 +71,18 @@ class ImageCache: NSObject {
                 try? imageCache.imageStorage.removeObject(forKey: cacheKey)
             }
             
+            guard !imageCache.loadingImageIds.contains(cacheKey) else {
+                return
+            }
+            
             if let exists = try? imageCache.imageStorage.existsObject(forKey: cacheKey),
                 exists {
-                Log("ImagesDic existed \(node.url?.lastPathComponent ?? "")")
                 return
             }
             
             let blockOperation = BlockOperation()
             DispatchQueue.main.async {
                 imageCache.loadImageOperations[cacheKey] = blockOperation
-            }
-            
-            guard !imageCache.loadingImageIds.contains(cacheKey) else {
-                Log("Image is loading \(node.url?.lastPathComponent ?? "")")
-                return
             }
             
             imageCache.loadingImageIds.append(cacheKey)
@@ -106,7 +105,6 @@ class ImageCache: NSObject {
                         imageCache.setImage(image, forKey: cacheKey)
                         imageCache.loadingImageIds.removeAll(where: { $0 == cacheKey })
                     }
-                    Log("Finish loading image \(node.url?.lastPathComponent ?? "")")
                 }
             }
             imageCache.imageLoadingQueue.addOperation(blockOperation)
