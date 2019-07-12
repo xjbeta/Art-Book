@@ -119,9 +119,10 @@ class FileNode: NSObject {
     func cacheKey(_ width: CGFloat) -> String {
         let markPixelSize = maxPixelSize(width)
         guard let url = url, let date = url.fileModificationDate() else { return "" }
-        var cacheKey = "\(url.absoluteString) - \(markPixelSize) - "
-        cacheKey += "\(date)"
-        return cacheKey.data(using: .utf8)?.base64EncodedString() ?? ""
+        var cacheKey = "\(url.absoluteString)"
+        cacheKey += " - \(date)"
+        cacheKey += " - \(markPixelSize)"
+        return cacheKey
     }
 }
 
