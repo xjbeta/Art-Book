@@ -105,6 +105,7 @@ class ContentViewController: NSViewController {
                 self.fileNode = node
                 ImageCache.shared.cleanDics()
                 self.collectionView.reloadData()
+                self.collectionView.scrollToTop()
                 self.reloadPreviewPanel()
             }
         }
