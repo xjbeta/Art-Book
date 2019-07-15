@@ -58,7 +58,7 @@ class ContentViewController: NSViewController {
     var baseWidth: CGFloat = 160
     var itemSizeScale: CGFloat = 1
     
-    var viewMode: ViewMode = .column
+    var viewMode: MainWindowController.ViewMode = .column
     
     var layout: CollectionViewLayout {
         get {
@@ -111,7 +111,7 @@ class ContentViewController: NSViewController {
         }
         
         NotificationCenter.default.addObserver(forName: .viewModeDidChange, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: ViewMode],
+            if let userInfo = $0.userInfo as? [String: MainWindowController.ViewMode],
                 let viewMode = userInfo["viewMode"] {
                 self.viewMode = viewMode
                 let layout = self.layout

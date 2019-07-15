@@ -66,13 +66,13 @@ class Preferences: NSObject {
         defaultsSet(favourites, forKey: .favourites)
     }
     
-    func setScales(_ value: Double, for view: ViewMode) {
+    func setScales(_ value: Double, for view: MainWindowController.ViewMode) {
         var dic = defaults(.scales) as? [String: Double] ?? [String: Double]()
         dic[view.rawValue] = value
         defaultsSet(dic, forKey: .scales)
     }
     
-    func scales(for view: ViewMode) -> Double {
+    func scales(for view: MainWindowController.ViewMode) -> Double {
         guard let dic = defaults(.scales) as? [String: Double],
             let value = dic[view.rawValue] else {
             return 0.5

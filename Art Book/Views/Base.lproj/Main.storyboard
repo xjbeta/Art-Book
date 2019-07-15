@@ -720,6 +720,9 @@
                                                 <segment image="NSGoRightTemplate" width="32" tag="1"/>
                                             </segments>
                                         </segmentedCell>
+                                        <connections>
+                                            <action selector="forwardBackward:" target="B8D-0N-5wS" id="x4C-AY-L4V"/>
+                                        </connections>
                                     </segmentedControl>
                                 </toolbarItem>
                                 <toolbarItem implicitItemIdentifier="A4E5D738-EC4E-4F9E-9DA5-FB0873EB9898" label="Custom View" paletteLabel="Custom View" id="jp8-4d-3Ww">
@@ -770,6 +773,7 @@
                         </connections>
                     </window>
                     <connections>
+                        <outlet property="forwardBackWardSegmentedControl" destination="5iS-C1-NMp" id="i0Y-uS-pKh"/>
                         <outlet property="modeSegmentedControl" destination="CHM-a0-qJA" id="Fhw-Te-Sp4"/>
                         <outlet property="scaleSlider" destination="Mkh-UM-CCM" id="95f-GC-yKp"/>
                         <segue destination="fak-27-eRD" kind="relationship" relationship="window.shadowedContentViewController" id="gxY-Cc-asJ"/>
