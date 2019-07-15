@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" customObjectInstantitationMethod="direct">
+    <dependencies>
+        <deployment identifier="macosx"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14460.31"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <customObject id="-2" userLabel="File's Owner"/>
+        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
+        <customView id="c22-O7-iKe" customClass="ImageItemCell" customModule="Art_Book" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="150" height="150"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+            <subviews>
+                <box boxType="custom" borderWidth="0.0" cornerRadius="5" title="Box" titlePosition="noTitle" translatesAutoresizingMaskIntoConstraints="NO" id="0VL-0o-QNC">
+                    <rect key="frame" x="0.0" y="23" width="150" height="127"/>
+                    <view key="contentView" id="YAb-P6-dHe">
+                        <rect key="frame" x="0.0" y="0.0" width="150" height="127"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <color key="fillColor" name="windowBackgroundColor" catalog="System" colorSpace="catalog"/>
+                </box>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="prq-MU-3rf">
+                    <rect key="frame" x="8" y="31" width="134" height="111"/>
+                    <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyUpOrDown" id="Gtu-cF-24f"/>
+                </imageView>
+                <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fjB-Ge-sfq">
+                    <rect key="frame" x="27" y="0.0" width="96" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" relation="lessThanOrEqual" constant="34" id="6QP-7C-pQW"/>
+                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="17" id="xxt-kP-UCb"/>
+                    </constraints>
+                    <textFieldCell key="cell" truncatesLastVisibleLine="YES" alignment="center" title="Multiline Label" id="zxe-OQ-P4l">
+                        <font key="font" metaFont="system"/>
+                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                    </textFieldCell>
+                </textField>
+            </subviews>
+            <constraints>
+                <constraint firstItem="fjB-Ge-sfq" firstAttribute="top" secondItem="prq-MU-3rf" secondAttribute="bottom" constant="14" id="54P-ev-jzy"/>
+                <constraint firstItem="0VL-0o-QNC" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" id="AFp-6d-me2"/>
+                <constraint firstAttribute="trailing" secondItem="prq-MU-3rf" secondAttribute="trailing" constant="8" id="Q9o-lz-2wj"/>
+                <constraint firstAttribute="bottom" secondItem="fjB-Ge-sfq" secondAttribute="bottom" id="QEO-ew-24r"/>
+                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="fjB-Ge-sfq" secondAttribute="trailing" constant="8" id="a7g-jJ-i7T"/>
+                <constraint firstAttribute="trailing" secondItem="0VL-0o-QNC" secondAttribute="trailing" id="bIa-iM-ci7"/>
+                <constraint firstItem="fjB-Ge-sfq" firstAttribute="top" secondItem="0VL-0o-QNC" secondAttribute="bottom" constant="6" id="ddC-OO-tkH"/>
+                <constraint firstItem="fjB-Ge-sfq" firstAttribute="centerX" secondItem="c22-O7-iKe" secondAttribute="centerX" id="egI-bL-umL"/>
+                <constraint firstItem="0VL-0o-QNC" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" id="fss-OO-KFc"/>
+                <constraint firstItem="prq-MU-3rf" firstAttribute="leading" secondItem="c22-O7-iKe" secondAttribute="leading" constant="8" id="rUi-Dw-1Hx"/>
+                <constraint firstItem="prq-MU-3rf" firstAttribute="top" secondItem="c22-O7-iKe" secondAttribute="top" constant="8" id="tGm-ge-4br"/>
+                <constraint firstItem="fjB-Ge-sfq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="c22-O7-iKe" secondAttribute="leading" constant="8" id="wwE-FT-8m9"/>
+            </constraints>
+            <connections>
+                <outlet property="box" destination="0VL-0o-QNC" id="gUa-RD-d9f"/>
+                <outlet property="imageView" destination="prq-MU-3rf" id="gJZ-7T-qEU"/>
+                <outlet property="textField" destination="fjB-Ge-sfq" id="L0Q-WG-dF1"/>
+            </connections>
+            <point key="canvasLocation" x="-6" y="108"/>
+        </customView>
+    </objects>
+</document>
