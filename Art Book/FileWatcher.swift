@@ -1,10 +1,4 @@
-//
-//  FileWatcher.swift
-//  Art Book
-//
-//  Created by xjbeta on 2018/10/16.
-//  Copyright © 2018 xjbeta. All rights reserved.
-//
+// https://github.com/futurelab/swift-utils/blob/master/Sources/Utils/file/filewatcher/FileWatcher.swift
 
 import Cocoa
 
