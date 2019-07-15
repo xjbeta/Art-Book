@@ -8,7 +8,7 @@ macOS navite image viewer.
 
 
 ## Build
- `carthage bootstrap`
+ `carthage bootstrap --platform macOS`
 
 ## Acknowledgements
 - [Cache](https://github.com/hyperoslo/Cache)
