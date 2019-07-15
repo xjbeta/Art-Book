@@ -100,8 +100,8 @@ class ContentViewController: NSViewController {
         ImageItemCell.register(in: collectionView)
         
         NotificationCenter.default.addObserver(forName: .sidebarSelectionDidChange, object: nil, queue: .main) {
-            if let userInfo = $0.userInfo as? [String: FileNode],
-                let node = userInfo["node"] {
+            if let userInfo = $0.userInfo as? [String: Any],
+                let node = userInfo["node"] as? FileNode {
                 self.fileNode = node
                 ImageCache.shared.cleanDics()
                 self.collectionView.reloadData()

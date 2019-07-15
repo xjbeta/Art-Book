@@ -60,8 +60,7 @@ class MainWindowController: NSWindowController {
         default:
             return
         }
-        
-        guard let item = historys.history[safe: historys.current] else {
+        guard let item = historys.history[safe: index] else {
             return
         }
         historys.current = index
@@ -94,14 +93,16 @@ class MainWindowController: NSWindowController {
             
             self?.historys.history.append(node)
             self?.historys.current = (self?.historys.history.count ?? 0) - 1
+            
             self?.updateForwardBackwardState()
         }
+        updateForwardBackwardState()
     }
     
     func updateForwardBackwardState() {
         guard let control = forwardBackWardSegmentedControl,
             control.segmentCount == 2 else { return }
-        control.setEnabled(historys.current != historys.history.count - 1, forSegment: 1)
+        control.setEnabled(historys.current != (historys.history.count - 1), forSegment: 1)
         control.setEnabled(historys.current > 0, forSegment: 0)
     }
 }
