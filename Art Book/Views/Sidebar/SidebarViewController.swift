@@ -77,16 +77,14 @@ class SidebarViewController: NSViewController {
             Log(error)
         }
         
-        let favourites = Preferences.shared.favourites
-        guard favourites.count > 0 else { return }
+        
+        guard let favourites = Preferences.shared.favourites,
+            favourites.count > 0 else { return }
         let favouritesNode = FileNode(name: "Favourites", true)
         fileNodes.append(favouritesNode)
         
-        favourites.forEach {
-            let re = $0.startAccessingSecurityScopedResource()
-            Log("startAccessingSecurityScopedResource \(re)")
-            fileNodes.append(FileNode(url: $0))
-        }
+        let nodes = favourites.map({ FileNode(url: $0.1, id: $0.0) })
+        fileNodes.append(contentsOf: nodes)
     }
     
     
@@ -252,11 +250,11 @@ extension SidebarViewController: NSMenuItemValidation {
     
     @IBAction func removeFromSidebar(_ sender: Any) {
         guard let item = (sidebarOutlineView.item(atRow: sidebarOutlineView.clickedRow) as? NSTreeNode)?.representedObject as? FileNode,
-            let url = item.url else {
+            let id = item.id else {
                 return
         }
-        url.stopAccessingSecurityScopedResource()
-        Preferences.shared.removeFavourite(url)
+        
+        Preferences.shared.removeFavourite(id)
         initNodes()
     }
     

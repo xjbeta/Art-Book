@@ -10,6 +10,8 @@ import Cocoa
 
 @objc(FileNode)
 class FileNode: NSObject {
+    
+    var id: String?
 
     @objc dynamic var name: String = ""
     @objc dynamic lazy var childrenDics: [FileNode] = {
@@ -96,10 +98,11 @@ class FileNode: NSObject {
         self.isHeader = isHeader
     }
     
-    init(url: URL) {
+    init(url: URL, id: String? = nil) {
         super.init()
         self.url = url
         name = url.lastPathComponent
+        self.id = id
     }
     
     func getChild(_ name: String) -> FileNode? {
