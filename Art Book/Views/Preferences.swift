@@ -17,53 +17,37 @@ class Preferences: NSObject {
     private let prefs = UserDefaults.standard
     private let keys = PreferenceKeys.self
     
-    var favourites: [URL] {
+    var favourites: [(String, URL)]? {
         get {
-            guard var favourites = defaults(.favourites) as? [String: Data] else { return [] }
-            let keys = favourites.keys.sorted()
-            var invalidKey = [String]()
-            let urls = keys.compactMap { key -> URL? in
-                guard let data = favourites[key],
-                    let url = URLSecurityScope.resolvingBookmark(data) else {
-                        invalidKey.append(key)
-                        return nil
+            guard let saved = defaults(.favourites) as? [[String]] else {
+                return nil
+            }
+            return saved.compactMap { i -> (String, URL)? in
+                guard let id = i[safe: 0],
+                    let uStr = i[safe: 1],
+                    let url = URL(string: uStr) else {
+                    return nil
                 }
-                return url
+                return (id, url)
             }
-            
-            invalidKey.forEach {
-                favourites[$0] = nil
-            }
-            defaultsSet(favourites, forKey: .favourites)
-            return urls
         }
     }
 
     
-    func removeFavourite(_ url: URL) {
-        guard var favourites = defaults(.favourites) as? [String: Data] else { return }
-        
-        favourites.filter {
-            URLSecurityScope.resolvingBookmark($0.value) == url
-            }.keys.forEach {
-                favourites.removeValue(forKey: $0)
+    func removeFavourite(_ id: String) {
+        guard var favourites = defaults(.favourites) as? [[String]] else { return }
+        favourites.removeAll {
+            $0.contains(where: { $0 == id })
         }
         defaultsSet(favourites, forKey: .favourites)
     }
     
     
     func addFavourite(_ url: URL) {
-        var favourites = defaults(.favourites) as? [String: Data] ?? [String: Data]()
-        var newKey = "1.0"
-        if let maxKeyStr = favourites.keys.max(), let maxKey = Double(maxKeyStr) {
-            newKey = "\(maxKey + 1)"
-        } else {
-            assert(favourites.count == 0)
-        }
-        
-        favourites[newKey] = URLSecurityScope.bookmarkData(for: url)
-        
-        defaultsSet(favourites, forKey: .favourites)
+        var f = defaults(.favourites) as? [[String]] ?? [[String]]()
+        let newKey = "\(UUID())"
+        f.append([newKey, url.absoluteString])
+        defaultsSet(f, forKey: .favourites)
     }
     
     func setScales(_ value: Double, for view: MainWindowController.ViewMode) {
@@ -78,6 +62,12 @@ class Preferences: NSObject {
             return 0.5
         }
         return value
+    }
+    
+    func prepareUserDefaults() {
+        if let _ = defaults(.favourites) as? [String: Data] {
+            prefs.removeObject(forKey: PreferenceKeys.favourites.rawValue)
+        }
     }
 }
 

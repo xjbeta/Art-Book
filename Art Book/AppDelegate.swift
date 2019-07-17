@@ -36,6 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         Log("macOS " + ProcessInfo().operatingSystemVersionString)
         
         removeExpired()
+        Preferences.shared.prepareUserDefaults()
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {
