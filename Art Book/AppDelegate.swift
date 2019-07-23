@@ -49,6 +49,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         ImageCache.shared.removeExpired()
         Log(ImageCache.shared.cacheSize())
     }
+    
+    func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
+        if !flag {
+            for window in sender.windows {
+                if window.className == "NSWindow" {
+                    window.makeKeyAndOrderFront(self)
+                }
+            }
+        }
+        return true
+    }
 }
 
 
