@@ -12,8 +12,6 @@
 		0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9A72162274B00460577 /* SidebarOutlineView.swift */; };
 		0102E9B12162502500460577 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9B02162502500460577 /* Preferences.swift */; };
 		01174CB421762A1000A0C01C /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01174CB321762A1000A0C01C /* FileWatcher.swift */; };
-		013017E1216C79B30074144B /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0113333F2165B7B200DE7604 /* DevMateKit.framework */; };
-		013017E2216C79B30074144B /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0113333F2165B7B200DE7604 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		013017E7216C89840074144B /* ImageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013017E5216C89840074144B /* ImageItemCell.xib */; };
 		013017E8216C89840074144B /* ImageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013017E6216C89840074144B /* ImageItemCell.swift */; };
 		013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; };
@@ -41,7 +39,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				013017E2216C79B30074144B /* DevMateKit.framework in Embed Frameworks */,
 				013017F2216CE6B10074144B /* CollectionView.framework in Embed Frameworks */,
 				013B5AB22170E9710042F26D /* Cache.framework in Embed Frameworks */,
 			);
@@ -66,7 +63,6 @@
 		0102E9A52162085A00460577 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		0102E9A72162274B00460577 /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		0102E9B02162502500460577 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Views/Preferences.swift; sourceTree = "<group>"; };
-		0113333F2165B7B200DE7604 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = SOURCE_ROOT; };
 		01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art Book-Bridging-Header.h"; sourceTree = "<group>"; };
 		01174CB321762A1000A0C01C /* FileWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
 		013017E5216C89840074144B /* ImageItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageItemCell.xib; sourceTree = "<group>"; };
@@ -95,7 +91,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013017E1216C79B30074144B /* DevMateKit.framework in Frameworks */,
 				013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,7 +128,6 @@
 				013B5AAC2170E9630042F26D /* Cache.framework.dSYM */,
 				013017ED216CE6A90074144B /* CollectionView.framework */,
 				013017EE216CE6A90074144B /* CollectionView.framework.dSYM */,
-				0113333F2165B7B200DE7604 /* DevMateKit.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -213,7 +207,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1110;
 				ORGANIZATIONNAME = xjbeta;
 				TargetAttributes = {
 					016A3C95216058D1005515E0 = {
@@ -436,6 +430,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -463,6 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
