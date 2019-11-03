@@ -12,6 +12,7 @@
 		0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9A72162274B00460577 /* SidebarOutlineView.swift */; };
 		0102E9B12162502500460577 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9B02162502500460577 /* Preferences.swift */; };
 		01174CB421762A1000A0C01C /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01174CB321762A1000A0C01C /* FileWatcher.swift */; };
+		0122FE4A236F050D00BFFC50 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0122FE49236F050D00BFFC50 /* Cartfile */; };
 		013017E7216C89840074144B /* ImageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013017E5216C89840074144B /* ImageItemCell.xib */; };
 		013017E8216C89840074144B /* ImageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013017E6216C89840074144B /* ImageItemCell.swift */; };
 		013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; };
@@ -65,6 +66,7 @@
 		0102E9B02162502500460577 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Views/Preferences.swift; sourceTree = "<group>"; };
 		01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art Book-Bridging-Header.h"; sourceTree = "<group>"; };
 		01174CB321762A1000A0C01C /* FileWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
+		0122FE49236F050D00BFFC50 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		013017E5216C89840074144B /* ImageItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageItemCell.xib; sourceTree = "<group>"; };
 		013017E6216C89840074144B /* ImageItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageItemCell.swift; sourceTree = "<group>"; };
 		013017ED216CE6A90074144B /* CollectionView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CollectionView.framework; path = Carthage/Build/Mac/CollectionView.framework; sourceTree = SOURCE_ROOT; };
@@ -166,6 +168,7 @@
 			children = (
 				016A3CA2216058D2005515E0 /* Info.plist */,
 				016A3C9D216058D2005515E0 /* Assets.xcassets */,
+				0122FE49236F050D00BFFC50 /* Cartfile */,
 				016A3C99216058D1005515E0 /* AppDelegate.swift */,
 				0102E9B02162502500460577 /* Preferences.swift */,
 				01174CB321762A1000A0C01C /* FileWatcher.swift */,
@@ -246,6 +249,7 @@
 			files = (
 				016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */,
 				016A3CA1216058D2005515E0 /* Main.storyboard in Resources */,
+				0122FE4A236F050D00BFFC50 /* Cartfile in Resources */,
 				013017E7216C89840074144B /* ImageItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
