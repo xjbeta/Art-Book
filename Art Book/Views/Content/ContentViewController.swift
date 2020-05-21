@@ -209,7 +209,13 @@ class ContentViewController: NSViewController {
                     $0.offset
                 }).first else { return }
                 self?.fileNode?.childrenImages.remove(at: index)
-                self?.collectionView.deleteItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                
+                if self?.collectionView.numberOfItems(in: 0) == 1 {
+                    self?.collectionView.reloadData()
+                    self?.selectTab(.empty)
+                } else {
+                    self?.collectionView.deleteItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                }
                 return
             }
             
