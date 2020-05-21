@@ -12,6 +12,12 @@ import Quartz
 
 class ContentViewController: NSViewController {
 
+    enum ContentTab: Int {
+        case empty
+        case content
+        case page
+    }
+    
     @IBOutlet var collectionViewMenu: NSMenu!
     @IBOutlet weak var collectionView: CollectionView!
     @IBOutlet weak var tabView: NSTabView!
@@ -50,7 +56,7 @@ class ContentViewController: NSViewController {
     var fileNode: FileNode? = nil {
         didSet {
             filesObserver()
-            fileNode?.childrenDics.count ?? 0 > 0 ? tabView.selectTabViewItem(at: 0) : tabView.selectTabViewItem(at: 1)
+            fileNode?.childrenImages.count ?? 0 > 0 ? self.selectTab(.content) : self.selectTab(.empty)
         }
     }
     
@@ -171,6 +177,10 @@ class ContentViewController: NSViewController {
             let width = self.collectionView.frame.width * (0.5 - scale / 2) / 2
             l.sectionInsets = NSEdgeInsets(top: 0, left: width, bottom: 0, right: width)
         }
+    }
+    
+    func selectTab(_ item: ContentTab) {
+        tabView.selectTabViewItem(at: item.rawValue)
     }
     
     func filesObserver() {
