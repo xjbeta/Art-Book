@@ -85,8 +85,8 @@ class ImageItemCell: CollectionViewPreviewCell {
     func initNode(_ node: FileNode) {
         self.node = node
         textField?.stringValue = node.url?.lastPathComponent ?? ""
-        
-        imageViewObserver = imageView?.observe(\.frame, options: [.initial, .new]) { [weak self] imageView, _ in
+        initImageView(true)
+        imageViewObserver = imageView?.observe(\.frame, options: [.new]) { [weak self] imageView, _ in
             guard imageView.frame.width != 0,
                 imageView.frame.height != 0,
                 let inLiveResize = self?.inLiveResize,
