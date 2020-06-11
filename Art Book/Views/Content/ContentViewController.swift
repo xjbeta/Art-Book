@@ -415,7 +415,9 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
                 ImageCache.shared.requestPreviewImage($0, width)
             }
         } else {
-            // Preloading middle ?
+            nodes[min...max].forEach {
+                ImageCache.shared.requestPreviewImage($0, width)
+            }
         }
     }
     
