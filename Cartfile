@@ -1,3 +1,2 @@
-github "DevMate/DevMateKit"
 github "TheNounProject/CollectionView" "master"
-github "hyperoslo/Cache"
+github "xjbeta/Cache"

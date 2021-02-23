@@ -12,8 +12,7 @@
 		0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9A72162274B00460577 /* SidebarOutlineView.swift */; };
 		0102E9B12162502500460577 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9B02162502500460577 /* Preferences.swift */; };
 		01174CB421762A1000A0C01C /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01174CB321762A1000A0C01C /* FileWatcher.swift */; };
-		013017E1216C79B30074144B /* DevMateKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0113333F2165B7B200DE7604 /* DevMateKit.framework */; };
-		013017E2216C79B30074144B /* DevMateKit.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0113333F2165B7B200DE7604 /* DevMateKit.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0122FE4A236F050D00BFFC50 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0122FE49236F050D00BFFC50 /* Cartfile */; };
 		013017E7216C89840074144B /* ImageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013017E5216C89840074144B /* ImageItemCell.xib */; };
 		013017E8216C89840074144B /* ImageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013017E6216C89840074144B /* ImageItemCell.swift */; };
 		013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; };
@@ -32,6 +31,7 @@
 		016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3C99216058D1005515E0 /* AppDelegate.swift */; };
 		016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9D216058D2005515E0 /* Assets.xcassets */; };
 		016A3CA1216058D2005515E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9F216058D2005515E0 /* Main.storyboard */; };
+		016B05D724080A84003C4765 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B05D624080A84003C4765 /* MainMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -41,7 +41,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				013017E2216C79B30074144B /* DevMateKit.framework in Embed Frameworks */,
 				013017F2216CE6B10074144B /* CollectionView.framework in Embed Frameworks */,
 				013B5AB22170E9710042F26D /* Cache.framework in Embed Frameworks */,
 			);
@@ -66,9 +65,9 @@
 		0102E9A52162085A00460577 /* Identifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Identifiers.swift; sourceTree = "<group>"; };
 		0102E9A72162274B00460577 /* SidebarOutlineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarOutlineView.swift; sourceTree = "<group>"; };
 		0102E9B02162502500460577 /* Preferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Preferences.swift; path = Views/Preferences.swift; sourceTree = "<group>"; };
-		0113333F2165B7B200DE7604 /* DevMateKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DevMateKit.framework; path = Carthage/Build/Mac/DevMateKit.framework; sourceTree = SOURCE_ROOT; };
 		01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art Book-Bridging-Header.h"; sourceTree = "<group>"; };
 		01174CB321762A1000A0C01C /* FileWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
+		0122FE49236F050D00BFFC50 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
 		013017E5216C89840074144B /* ImageItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageItemCell.xib; sourceTree = "<group>"; };
 		013017E6216C89840074144B /* ImageItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageItemCell.swift; sourceTree = "<group>"; };
 		013017ED216CE6A90074144B /* CollectionView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CollectionView.framework; path = Carthage/Build/Mac/CollectionView.framework; sourceTree = SOURCE_ROOT; };
@@ -88,6 +87,7 @@
 		016A3C9D216058D2005515E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		016A3CA0216058D2005515E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		016A3CA2216058D2005515E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		016B05D624080A84003C4765 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,7 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013017E1216C79B30074144B /* DevMateKit.framework in Frameworks */,
 				013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -133,7 +132,6 @@
 				013B5AAC2170E9630042F26D /* Cache.framework.dSYM */,
 				013017ED216CE6A90074144B /* CollectionView.framework */,
 				013017EE216CE6A90074144B /* CollectionView.framework.dSYM */,
-				0113333F2165B7B200DE7604 /* DevMateKit.framework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -143,6 +141,7 @@
 			children = (
 				016A3C9F216058D2005515E0 /* Main.storyboard */,
 				014730082160A3B800F658A6 /* MainWindowController.swift */,
+				016B05D624080A84003C4765 /* MainMenu.swift */,
 				0102E9A52162085A00460577 /* Identifiers.swift */,
 				0102E9A22161FAF000460577 /* Sidebar */,
 				0102E9A12161FAE200460577 /* Content */,
@@ -172,6 +171,7 @@
 			children = (
 				016A3CA2216058D2005515E0 /* Info.plist */,
 				016A3C9D216058D2005515E0 /* Assets.xcassets */,
+				0122FE49236F050D00BFFC50 /* Cartfile */,
 				016A3C99216058D1005515E0 /* AppDelegate.swift */,
 				0102E9B02162502500460577 /* Preferences.swift */,
 				01174CB321762A1000A0C01C /* FileWatcher.swift */,
@@ -213,7 +213,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1000;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = xjbeta;
 				TargetAttributes = {
 					016A3C95216058D1005515E0 = {
@@ -252,6 +252,7 @@
 			files = (
 				016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */,
 				016A3CA1216058D2005515E0 /* Main.storyboard in Resources */,
+				0122FE4A236F050D00BFFC50 /* Cartfile in Resources */,
 				013017E7216C89840074144B /* ImageItemCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -287,6 +288,7 @@
 				01612E5021B7FA59003B43AC /* SafeSubscript.swift in Sources */,
 				013B5AB421717E2A0042F26D /* ImageCache.swift in Sources */,
 				0169097C21BB6AD8008CDF0E /* Log.swift in Sources */,
+				016B05D724080A84003C4765 /* MainMenu.swift in Sources */,
 				0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */,
 				0102E9A02161FA7500460577 /* ContentViewController.swift in Sources */,
 				016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */,
@@ -342,13 +344,14 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -403,13 +406,14 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
+				CODE_SIGN_IDENTITY = "Mac Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -436,8 +440,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H7NSMSBU6A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -449,9 +454,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.Art-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Art Book/Art Book-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -463,8 +468,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "-";
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = H7NSMSBU6A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/Mac",
@@ -476,9 +482,9 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 10.12;
+				MARKETING_VERSION = 0.0.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "com.xjbeta.Art-Book";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Art Book/Art Book-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 			};

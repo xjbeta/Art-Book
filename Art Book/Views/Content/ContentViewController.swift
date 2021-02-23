@@ -12,6 +12,12 @@ import Quartz
 
 class ContentViewController: NSViewController {
 
+    enum ContentTab: Int {
+        case empty
+        case content
+        case page
+    }
+    
     @IBOutlet var collectionViewMenu: NSMenu!
     @IBOutlet weak var collectionView: CollectionView!
     @IBOutlet weak var tabView: NSTabView!
@@ -50,7 +56,7 @@ class ContentViewController: NSViewController {
     var fileNode: FileNode? = nil {
         didSet {
             filesObserver()
-            fileNode?.childrenDics.count ?? 0 > 0 ? tabView.selectTabViewItem(at: 0) : tabView.selectTabViewItem(at: 1)
+            fileNode?.childrenImages.count ?? 0 > 0 ? self.selectTab(.content) : self.selectTab(.empty)
         }
     }
     
@@ -173,6 +179,10 @@ class ContentViewController: NSViewController {
         }
     }
     
+    func selectTab(_ item: ContentTab) {
+        tabView.selectTabViewItem(at: item.rawValue)
+    }
+    
     func filesObserver() {
         guard let path = fileNode?.url?.path else { return }
         fileWatcher?.stop()
@@ -199,7 +209,13 @@ class ContentViewController: NSViewController {
                     $0.offset
                 }).first else { return }
                 self?.fileNode?.childrenImages.remove(at: index)
-                self?.collectionView.deleteItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                
+                if self?.collectionView.numberOfItems(in: 0) == 1 {
+                    self?.collectionView.reloadData()
+                    self?.selectTab(.empty)
+                } else {
+                    self?.collectionView.deleteItems(at: [IndexPath(item: index, section: 0)], animated: true)
+                }
                 return
             }
             
@@ -399,7 +415,9 @@ extension ContentViewController: CollectionViewDelegate, CollectionViewDataSourc
                 ImageCache.shared.requestPreviewImage($0, width)
             }
         } else {
-            // Preloading middle ?
+            nodes[min...max].forEach {
+                ImageCache.shared.requestPreviewImage($0, width)
+            }
         }
     }
     

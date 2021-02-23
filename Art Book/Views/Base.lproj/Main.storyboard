@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="14490.70"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="17701"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -647,6 +647,7 @@
                                                 <action selector="performZoom:" target="Ady-hI-5gd" id="DIl-cC-cCs"/>
                                             </connections>
                                         </menuItem>
+                                        <menuItem title="Enter Full Screen" keyEquivalent="f" id="fFh-s1-8gn"/>
                                         <menuItem isSeparatorItem="YES" id="eu3-7i-yIM"/>
                                         <menuItem title="Bring All to Front" id="LE2-aR-0XJ">
                                             <modifierMask key="keyEquivalentModifierMask"/>
@@ -677,6 +678,7 @@
                 </application>
                 <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="Art_Book" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
+                <customObject id="M1u-da-KZl" customClass="MainMenu" customModule="Art_Book" customModuleProvider="target"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="76" y="-294"/>
@@ -688,7 +690,7 @@
                     <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" frameAutosaveName="MainWindow" animationBehavior="default" titleVisibility="hidden" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <rect key="contentRect" x="196" y="240" width="960" height="540"/>
-                        <rect key="screenRect" x="0.0" y="0.0" width="1680" height="1027"/>
+                        <rect key="screenRect" x="0.0" y="0.0" width="1440" height="877"/>
                         <value key="minSize" type="size" width="960" height="540"/>
                         <toolbar key="toolbar" implicitIdentifier="DA408295-5D59-44DC-920F-96B931017B4E" displayMode="iconOnly" sizeMode="regular" id="fpd-jo-Pxm">
                             <allowedToolbarItems>
@@ -697,8 +699,8 @@
                                 <toolbarItem implicitItemIdentifier="5CB57658-5128-4CD0-A4CB-89A758B9953E" label="Sidebar" paletteLabel="Sidebar" image="NSSidebarTemplate" sizingBehavior="auto" id="1yw-A1-x9I">
                                     <nil key="toolTip"/>
                                     <button key="view" verticalHuggingPriority="750" id="CHD-Dd-DWJ">
-                                        <rect key="frame" x="8" y="14" width="33" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="9" y="14" width="30" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <buttonCell key="cell" type="roundTextured" bezelStyle="texturedRounded" image="NSSidebarTemplate" imagePosition="only" alignment="center" borderStyle="border" inset="2" id="YFJ-2O-cKX">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -711,8 +713,8 @@
                                 <toolbarItem implicitItemIdentifier="DF016877-DDB0-4E6B-9D6F-B945E1D5A19A" label="Back/Forward" paletteLabel="Back/Forward" sizingBehavior="auto" id="0qr-Vz-iu2">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="5iS-C1-NMp">
-                                        <rect key="frame" x="3" y="14" width="75" height="27"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="4" y="14" width="71" height="24"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="separated" trackingMode="momentary" id="mVy-6o-Yug">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -741,8 +743,8 @@
                                 <toolbarItem implicitItemIdentifier="C2711577-6514-48E2-A7E7-701FE95B41EB" label="Layout" paletteLabel="Layout" sizingBehavior="auto" id="rrE-ti-m27" userLabel="Layout">
                                     <nil key="toolTip"/>
                                     <segmentedControl key="view" verticalHuggingPriority="750" id="CHM-a0-qJA">
-                                        <rect key="frame" x="0.0" y="14" width="100" height="24"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <rect key="frame" x="0.0" y="14" width="100" height="23"/>
+                                        <autoresizingMask key="autoresizingMask"/>
                                         <segmentedCell key="cell" borderStyle="border" alignment="left" style="texturedSquare" trackingMode="selectOne" id="7dE-f9-gmR">
                                             <font key="font" metaFont="system"/>
                                             <segments>
@@ -826,7 +828,7 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="cQu-iN-Tjf">
-                                                    <rect key="frame" x="223" y="218" width="99" height="25"/>
+                                                    <rect key="frame" x="221" y="218" width="102" height="25"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="No Images" id="buK-sc-keP">
                                                         <font key="font" metaFont="system" size="21"/>
                                                         <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
@@ -987,26 +989,25 @@
         <scene sceneID="IUH-hk-M6W">
             <objects>
                 <viewController id="veI-ro-lad" customClass="SidebarViewController" customModule="Art_Book" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="uE8-Rv-wRh">
-                        <rect key="frame" x="0.0" y="0.0" width="148" height="460"/>
+                    <view key="view" misplaced="YES" id="uE8-Rv-wRh">
+                        <rect key="frame" x="0.0" y="0.0" width="148" height="459"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-i0-cOu">
-                                <rect key="frame" x="0.0" y="37" width="148" height="423"/>
+                                <rect key="frame" x="0.0" y="37" width="168" height="407"/>
                                 <clipView key="contentView" drawsBackground="NO" id="QGW-Pf-dNG">
-                                    <rect key="frame" x="0.0" y="0.0" width="148" height="423"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="168" height="407"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="21" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="1A8-dQ-bpc" id="G9S-Qo-OcY" customClass="SidebarOutlineView" customModule="Art_Book" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="148" height="423"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="407"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
                                             <tableColumns>
-                                                <tableColumn editable="NO" width="145" minWidth="16" maxWidth="1000" id="1A8-dQ-bpc">
+                                                <tableColumn editable="NO" width="136" minWidth="16" maxWidth="1000" id="1A8-dQ-bpc">
                                                     <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border">
-                                                        <font key="font" metaFont="smallSystem"/>
                                                         <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="headerColor" catalog="System" colorSpace="catalog"/>
                                                     </tableHeaderCell>
@@ -1018,7 +1019,7 @@
                                                     <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
                                                     <prototypeCellViews>
                                                         <tableCellView identifier="SidebarHeaderCell" id="eY7-uQ-kMj">
-                                                            <rect key="frame" x="1" y="1" width="145" height="17"/>
+                                                            <rect key="frame" x="11" y="1" width="145" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ujF-s8-V5Z">
@@ -1043,13 +1044,13 @@
                                                             </connections>
                                                         </tableCellView>
                                                         <tableCellView identifier="SidebarDataCell" id="eW8-6t-gH5">
-                                                            <rect key="frame" x="1" y="20" width="145" height="17"/>
+                                                            <rect key="frame" x="11" y="20" width="145" height="17"/>
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7L-Bj-l0p">
                                                                     <rect key="frame" x="0.0" y="0.0" width="142" height="17"/>
                                                                     <subviews>
-                                                                        <imageView translatesAutoresizingMaskIntoConstraints="NO" id="SCA-eV-Iz2" customClass="SideBarImageView" customModule="Art_Book" customModuleProvider="target">
+                                                                        <imageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SCA-eV-Iz2" customClass="SideBarImageView" customModule="Art_Book" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="17" height="17"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="17" id="JjQ-IK-4hP"/>
@@ -1058,7 +1059,7 @@
                                                                             <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" id="UKj-gX-un8"/>
                                                                         </imageView>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="41b-Kg-efb">
-                                                                            <rect key="frame" x="19" y="1" width="125" height="16"/>
+                                                                            <rect key="frame" x="19" y="1" width="125" height="15"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ffZ-qS-3g2">
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1177,11 +1178,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="NSColumnViewTemplate" width="16" height="10"/>
-        <image name="NSGoLeftTemplate" width="9" height="12"/>
-        <image name="NSGoRightTemplate" width="9" height="12"/>
-        <image name="NSIconViewTemplate" width="14" height="10"/>
-        <image name="NSListViewTemplate" width="14" height="10"/>
-        <image name="NSSidebarTemplate" width="15" height="12"/>
+        <image name="NSColumnViewTemplate" width="18" height="14"/>
+        <image name="NSGoLeftTemplate" width="10" height="14"/>
+        <image name="NSGoRightTemplate" width="10" height="14"/>
+        <image name="NSIconViewTemplate" width="15" height="14"/>
+        <image name="NSListViewTemplate" width="16" height="12"/>
+        <image name="NSSidebarTemplate" width="18" height="14"/>
     </resources>
 </document>

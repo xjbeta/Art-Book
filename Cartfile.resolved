@@ -1,3 +1,2 @@
-github "DevMate/DevMateKit" "v1.9.3"
-github "TheNounProject/CollectionView" "531b00762a80e6281aeff24e88c37ea03dc5248c"
-github "hyperoslo/Cache" "5.2.0"
+github "TheNounProject/CollectionView" "a80e270156b8f36b413a2caf76b704ed6b28c073"
+github "xjbeta/Cache" "5.2.0"
