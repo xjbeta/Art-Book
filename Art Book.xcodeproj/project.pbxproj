@@ -31,6 +31,7 @@
 		016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016A3C99216058D1005515E0 /* AppDelegate.swift */; };
 		016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9D216058D2005515E0 /* Assets.xcassets */; };
 		016A3CA1216058D2005515E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9F216058D2005515E0 /* Main.storyboard */; };
+		016B05D724080A84003C4765 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B05D624080A84003C4765 /* MainMenu.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -86,6 +87,7 @@
 		016A3C9D216058D2005515E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		016A3CA0216058D2005515E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		016A3CA2216058D2005515E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		016B05D624080A84003C4765 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,6 +141,7 @@
 			children = (
 				016A3C9F216058D2005515E0 /* Main.storyboard */,
 				014730082160A3B800F658A6 /* MainWindowController.swift */,
+				016B05D624080A84003C4765 /* MainMenu.swift */,
 				0102E9A52162085A00460577 /* Identifiers.swift */,
 				0102E9A22161FAF000460577 /* Sidebar */,
 				0102E9A12161FAE200460577 /* Content */,
@@ -210,7 +213,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1000;
-				LastUpgradeCheck = 1110;
+				LastUpgradeCheck = 1240;
 				ORGANIZATIONNAME = xjbeta;
 				TargetAttributes = {
 					016A3C95216058D1005515E0 = {
@@ -285,6 +288,7 @@
 				01612E5021B7FA59003B43AC /* SafeSubscript.swift in Sources */,
 				013B5AB421717E2A0042F26D /* ImageCache.swift in Sources */,
 				0169097C21BB6AD8008CDF0E /* Log.swift in Sources */,
+				016B05D724080A84003C4765 /* MainMenu.swift in Sources */,
 				0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */,
 				0102E9A02161FA7500460577 /* ContentViewController.swift in Sources */,
 				016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */,
@@ -340,6 +344,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -401,6 +406,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
