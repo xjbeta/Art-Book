@@ -99,8 +99,9 @@ class ImageCache: NSObject {
                 
                 let image = NSImage(cgImage: thumbnail, size: NSZeroSize)
                 let imageCache = ImageCache.shared
+                
+                imageCache.setImage(image, forKey: cacheKey)
                 DispatchQueue.main.async {
-                    imageCache.setImage(image, forKey: cacheKey)
                     imageCache.loadingImageIds.removeAll(where: { $0 == cacheKey })
                 }
             }
