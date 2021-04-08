@@ -32,6 +32,7 @@
 		016A3C9E216058D2005515E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9D216058D2005515E0 /* Assets.xcassets */; };
 		016A3CA1216058D2005515E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 016A3C9F216058D2005515E0 /* Main.storyboard */; };
 		016B05D724080A84003C4765 /* MainMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B05D624080A84003C4765 /* MainMenu.swift */; };
+		016B8EFD25FF398F001CB119 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 016B8EFC25FF398F001CB119 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -88,6 +89,7 @@
 		016A3CA0216058D2005515E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		016A3CA2216058D2005515E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		016B05D624080A84003C4765 /* MainMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMenu.swift; sourceTree = "<group>"; };
+		016B8EFC25FF398F001CB119 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -176,6 +178,7 @@
 				0102E9B02162502500460577 /* Preferences.swift */,
 				01174CB321762A1000A0C01C /* FileWatcher.swift */,
 				01612E4F21B7FA59003B43AC /* SafeSubscript.swift */,
+				016B8EFC25FF398F001CB119 /* Task.swift */,
 				0169097B21BB6AD8008CDF0E /* Log.swift */,
 				01473003216099B700F658A6 /* Views */,
 				01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */,
@@ -292,6 +295,7 @@
 				0102E9A82162274B00460577 /* SidebarOutlineView.swift in Sources */,
 				0102E9A02161FA7500460577 /* ContentViewController.swift in Sources */,
 				016A3C9A216058D1005515E0 /* AppDelegate.swift in Sources */,
+				016B8EFD25FF398F001CB119 /* Task.swift in Sources */,
 				013B5AB8217205E70042F26D /* SidebarAddButton.swift in Sources */,
 				01473005216099D500F658A6 /* SidebarViewController.swift in Sources */,
 				01174CB421762A1000A0C01C /* FileWatcher.swift in Sources */,
