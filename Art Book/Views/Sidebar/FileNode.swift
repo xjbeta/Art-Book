@@ -14,22 +14,8 @@ class FileNode: NSObject {
     var id: String?
 
     @objc dynamic var name: String = ""
-    @objc dynamic lazy var childrenDics: [FileNode] = {
-        guard let url = url else { return [] }
-        do {
-            let urls = try FileManager.default.contentsOfDirectory(at: url, includingPropertiesForKeys: [.isDirectoryKey], options: .skipsHiddenFiles)
-            var nodes = try urls.filter { url -> Bool in
-                return try url.resourceValues(forKeys: [.isDirectoryKey]).isDirectory ?? false
-                }.map {
-                    FileNode(url: $0)
-            }
-            nodes.sort { $0.name < $1.name }
-            return nodes
-        } catch let error {
-            Log(error)
-        }
-        return []
-    }()
+    @objc var childrenDics = [FileNode]()
+    @objc dynamic var loading = false
     
     lazy var childrenImages: [FileNode] = {
         guard let url = url else { return [] }
@@ -103,6 +89,47 @@ class FileNode: NSObject {
         self.url = url
         name = url.lastPathComponent
         self.id = id
+        loading = true
+    }
+    
+    func initChildrenDics() {
+        guard !isHeader,
+              let url = url else { return }
+        
+        let ucc = url.pathComponents.count
+        
+        var paths = Task.shared.findAllFiles(url.path).map {
+            NSString(string: $0).deletingLastPathComponent
+        }.filter {
+            $0.pathComponents.count >= ucc
+        }
+        
+        paths = Array(Set(paths))
+        
+        paths.forEach {
+            var pathComponents = $0.pathComponents
+            pathComponents.removeSubrange(0..<ucc)
+            
+            var node = self
+            var u = url
+            
+            while pathComponents.count != 0 {
+                let name = pathComponents[0]
+                u.appendPathComponent(name)
+                
+                if let n = node.childrenDics.first(where: { $0.name == name }) {
+                    node = n
+                } else {
+                    let n = FileNode(name: name)
+                    n.url = u
+                    node.childrenDics.append(n)
+                    node = n
+                }
+                
+                pathComponents.removeFirst()
+            }
+        }
+        
     }
     
     func getChild(_ name: String) -> FileNode? {

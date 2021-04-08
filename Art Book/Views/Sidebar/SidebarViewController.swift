@@ -85,6 +85,21 @@ class SidebarViewController: NSViewController {
         
         let nodes = favourites.map({ FileNode(url: $0.1, id: $0.0) })
         fileNodes.append(contentsOf: nodes)
+        
+
+        DispatchQueue.global().async {
+            self.fileNodes.enumerated().forEach { row, node in
+                node.initChildrenDics()
+                
+                DispatchQueue.main.async {
+                    node.loading = false
+                    let item = self.sidebarOutlineView.item(atRow: row)
+                    self.sidebarOutlineView.reloadItem(item)
+                }
+            }
+        }
+        
+        
     }
     
     

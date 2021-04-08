@@ -994,13 +994,13 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <scrollView borderType="none" autohidesScrollers="YES" horizontalLineScroll="23" horizontalPageScroll="10" verticalLineScroll="23" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fUN-i0-cOu">
-                                <rect key="frame" x="0.0" y="37" width="168" height="407"/>
+                                <rect key="frame" x="0.0" y="37" width="168" height="405"/>
                                 <clipView key="contentView" drawsBackground="NO" id="QGW-Pf-dNG">
-                                    <rect key="frame" x="0.0" y="0.0" width="168" height="407"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="168" height="405"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <subviews>
                                         <outlineView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" selectionHighlightStyle="sourceList" multipleSelection="NO" autosaveColumns="NO" rowHeight="21" viewBased="YES" indentationPerLevel="16" autosaveExpandedItems="YES" outlineTableColumn="1A8-dQ-bpc" id="G9S-Qo-OcY" customClass="SidebarOutlineView" customModule="Art_Book" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="168" height="407"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="405"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <size key="intercellSpacing" width="3" height="2"/>
                                             <color key="backgroundColor" name="_sourceListBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -1048,7 +1048,7 @@
                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                             <subviews>
                                                                 <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="4" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f7L-Bj-l0p">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="142" height="17"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="143" height="17"/>
                                                                     <subviews>
                                                                         <imageView wantsLayer="YES" translatesAutoresizingMaskIntoConstraints="NO" id="SCA-eV-Iz2" customClass="SideBarImageView" customModule="Art_Book" customModuleProvider="target">
                                                                             <rect key="frame" x="0.0" y="0.0" width="17" height="17"/>
@@ -1057,9 +1057,27 @@
                                                                                 <constraint firstAttribute="width" secondItem="SCA-eV-Iz2" secondAttribute="height" multiplier="1:1" id="faQ-5f-w3T"/>
                                                                             </constraints>
                                                                             <imageCell key="cell" refusesFirstResponder="YES" imageScaling="proportionallyUpOrDown" id="UKj-gX-un8"/>
+                                                                            <connections>
+                                                                                <binding destination="eW8-6t-gH5" name="hidden" keyPath="objectValue.loading" id="BRu-Ir-sxe"/>
+                                                                            </connections>
                                                                         </imageView>
+                                                                        <progressIndicator maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="wMl-M6-N3X">
+                                                                            <rect key="frame" x="21" y="2" width="14" height="14"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="width" secondItem="wMl-M6-N3X" secondAttribute="height" multiplier="1:1" id="75s-dh-Zqf"/>
+                                                                                <constraint firstAttribute="height" constant="14" id="lyC-Vr-Pso"/>
+                                                                            </constraints>
+                                                                            <connections>
+                                                                                <binding destination="eW8-6t-gH5" name="animate" keyPath="objectValue.loading" id="B34-Rg-amf"/>
+                                                                                <binding destination="eW8-6t-gH5" name="hidden" keyPath="objectValue.loading" id="kWZ-xO-vaM">
+                                                                                    <dictionary key="options">
+                                                                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
+                                                                                    </dictionary>
+                                                                                </binding>
+                                                                            </connections>
+                                                                        </progressIndicator>
                                                                         <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="41b-Kg-efb">
-                                                                            <rect key="frame" x="19" y="1" width="125" height="15"/>
+                                                                            <rect key="frame" x="37" y="1" width="108" height="15"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" title="Table View Cell" id="ffZ-qS-3g2">
                                                                                 <font key="font" metaFont="cellTitle"/>
                                                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -1073,8 +1091,10 @@
                                                                     <visibilityPriorities>
                                                                         <integer value="1000"/>
                                                                         <integer value="1000"/>
+                                                                        <integer value="1000"/>
                                                                     </visibilityPriorities>
                                                                     <customSpacing>
+                                                                        <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                         <real value="3.4028234663852886e+38"/>
                                                                     </customSpacing>
@@ -1083,7 +1103,7 @@
                                                             <constraints>
                                                                 <constraint firstItem="f7L-Bj-l0p" firstAttribute="centerY" secondItem="eW8-6t-gH5" secondAttribute="centerY" id="3JG-fQ-S1L"/>
                                                                 <constraint firstItem="f7L-Bj-l0p" firstAttribute="leading" secondItem="eW8-6t-gH5" secondAttribute="leading" id="BAM-gX-SGy"/>
-                                                                <constraint firstAttribute="trailing" secondItem="f7L-Bj-l0p" secondAttribute="trailing" constant="3" id="Qp5-J2-SJa"/>
+                                                                <constraint firstAttribute="trailing" secondItem="f7L-Bj-l0p" secondAttribute="trailing" constant="2" id="Qp5-J2-SJa"/>
                                                             </constraints>
                                                             <connections>
                                                                 <outlet property="imageView" destination="SCA-eV-Iz2" id="4wH-de-9H8"/>
@@ -1174,7 +1194,7 @@
                     </items>
                 </menu>
             </objects>
-            <point key="canvasLocation" x="-314" y="1277"/>
+            <point key="canvasLocation" x="-314" y="1276.5"/>
         </scene>
     </scenes>
     <resources>
