@@ -28,7 +28,9 @@ class FileNode: NSObject {
                 }.map {
                     FileNode(url: $0)
             }
-            nodes.sort { $0.name < $1.name }
+            nodes.sort { (f1, f2) -> Bool in
+                f1.name.localizedStandardCompare(f2.name) == .orderedAscending
+            }
             return nodes
         } catch let error {
             Log(error)
@@ -130,6 +132,9 @@ class FileNode: NSObject {
             }
         }
         
+        childrenDics.sort { (f1, f2) -> Bool in
+            f1.name.localizedStandardCompare(f2.name) == .orderedAscending
+        }
     }
     
     func getChild(_ name: String) -> FileNode? {
