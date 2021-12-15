@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,13 +13,12 @@
 		0102E9B12162502500460577 /* Preferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0102E9B02162502500460577 /* Preferences.swift */; };
 		01174CB421762A1000A0C01C /* FileWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01174CB321762A1000A0C01C /* FileWatcher.swift */; };
 		0122FE4A236F050D00BFFC50 /* Cartfile in Resources */ = {isa = PBXBuildFile; fileRef = 0122FE49236F050D00BFFC50 /* Cartfile */; };
+		0127A572276994A7002A6D4F /* Cache.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0127A570276994A7002A6D4F /* Cache.xcframework */; };
+		0127A573276994A7002A6D4F /* Cache.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0127A570276994A7002A6D4F /* Cache.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		0127A574276994A7002A6D4F /* CollectionView.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0127A571276994A7002A6D4F /* CollectionView.xcframework */; };
+		0127A575276994A7002A6D4F /* CollectionView.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 0127A571276994A7002A6D4F /* CollectionView.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		013017E7216C89840074144B /* ImageItemCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 013017E5216C89840074144B /* ImageItemCell.xib */; };
 		013017E8216C89840074144B /* ImageItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013017E6216C89840074144B /* ImageItemCell.swift */; };
-		013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; };
-		013017F2216CE6B10074144B /* CollectionView.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 013017ED216CE6A90074144B /* CollectionView.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		013017F3216CE6BB0074144B /* CollectionView.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 013017EE216CE6A90074144B /* CollectionView.framework.dSYM */; };
-		013B5AB02170E9690042F26D /* Cache.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 013B5AAC2170E9630042F26D /* Cache.framework.dSYM */; };
-		013B5AB22170E9710042F26D /* Cache.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 013B5AAD2170E9630042F26D /* Cache.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		013B5AB421717E2A0042F26D /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B5AB321717E2A0042F26D /* ImageCache.swift */; };
 		013B5AB8217205E70042F26D /* SidebarAddButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B5AB7217205E70042F26D /* SidebarAddButton.swift */; };
 		01473005216099D500F658A6 /* SidebarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01473004216099D500F658A6 /* SidebarViewController.swift */; };
@@ -36,14 +35,14 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		013017E0216C79AE0074144B /* Embed Frameworks */ = {
+		0127A576276994A7002A6D4F /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				013017F2216CE6B10074144B /* CollectionView.framework in Embed Frameworks */,
-				013B5AB22170E9710042F26D /* Cache.framework in Embed Frameworks */,
+				0127A575276994A7002A6D4F /* CollectionView.xcframework in Embed Frameworks */,
+				0127A573276994A7002A6D4F /* Cache.xcframework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -54,8 +53,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
-				013B5AB02170E9690042F26D /* Cache.framework.dSYM in CopyFiles */,
-				013017F3216CE6BB0074144B /* CollectionView.framework.dSYM in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,12 +66,10 @@
 		01162B4821644EED00A9B087 /* Art Book-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Art Book-Bridging-Header.h"; sourceTree = "<group>"; };
 		01174CB321762A1000A0C01C /* FileWatcher.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWatcher.swift; sourceTree = "<group>"; };
 		0122FE49236F050D00BFFC50 /* Cartfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Cartfile; sourceTree = SOURCE_ROOT; };
+		0127A570276994A7002A6D4F /* Cache.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = Cache.xcframework; path = Carthage/Build/Cache.xcframework; sourceTree = SOURCE_ROOT; };
+		0127A571276994A7002A6D4F /* CollectionView.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = CollectionView.xcframework; path = Carthage/Build/CollectionView.xcframework; sourceTree = SOURCE_ROOT; };
 		013017E5216C89840074144B /* ImageItemCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImageItemCell.xib; sourceTree = "<group>"; };
 		013017E6216C89840074144B /* ImageItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageItemCell.swift; sourceTree = "<group>"; };
-		013017ED216CE6A90074144B /* CollectionView.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CollectionView.framework; path = Carthage/Build/Mac/CollectionView.framework; sourceTree = SOURCE_ROOT; };
-		013017EE216CE6A90074144B /* CollectionView.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = CollectionView.framework.dSYM; path = Carthage/Build/Mac/CollectionView.framework.dSYM; sourceTree = SOURCE_ROOT; };
-		013B5AAC2170E9630042F26D /* Cache.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Cache.framework.dSYM; path = Carthage/Build/Mac/Cache.framework.dSYM; sourceTree = SOURCE_ROOT; };
-		013B5AAD2170E9630042F26D /* Cache.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cache.framework; path = Carthage/Build/Mac/Cache.framework; sourceTree = SOURCE_ROOT; };
 		013B5AB321717E2A0042F26D /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		013B5AB7217205E70042F26D /* SidebarAddButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarAddButton.swift; sourceTree = "<group>"; };
 		01473004216099D500F658A6 /* SidebarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarViewController.swift; sourceTree = "<group>"; };
@@ -97,7 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				013017EF216CE6A90074144B /* CollectionView.framework in Frameworks */,
+				0127A574276994A7002A6D4F /* CollectionView.xcframework in Frameworks */,
+				0127A572276994A7002A6D4F /* Cache.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -130,10 +126,8 @@
 		011333362165B79900DE7604 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				013B5AAD2170E9630042F26D /* Cache.framework */,
-				013B5AAC2170E9630042F26D /* Cache.framework.dSYM */,
-				013017ED216CE6A90074144B /* CollectionView.framework */,
-				013017EE216CE6A90074144B /* CollectionView.framework.dSYM */,
+				0127A570276994A7002A6D4F /* Cache.xcframework */,
+				0127A571276994A7002A6D4F /* CollectionView.xcframework */,
 			);
 			path = Frameworks;
 			sourceTree = "<group>";
@@ -198,7 +192,7 @@
 				016A3C94216058D1005515E0 /* Resources */,
 				014730172160EC9100F658A6 /* CopyFiles */,
 				014730162160EC7D00F658A6 /* Run Script */,
-				013017E0216C79AE0074144B /* Embed Frameworks */,
+				0127A576276994A7002A6D4F /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -449,7 +443,7 @@
 				DEVELOPMENT_TEAM = H7NSMSBU6A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Art Book/Info.plist";
@@ -477,7 +471,7 @@
 				DEVELOPMENT_TEAM = H7NSMSBU6A;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Carthage/Build/Mac",
+					"$(PROJECT_DIR)/Carthage/Build",
 					"$(PROJECT_DIR)/Frameworks",
 				);
 				INFOPLIST_FILE = "Art Book/Info.plist";
