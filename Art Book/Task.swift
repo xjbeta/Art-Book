@@ -34,6 +34,10 @@ class Task: NSObject {
         
         var args = [dir]
         
+        args.append("-path")
+        args.append("*.photoslibrary")
+        args.append("-prune")
+        
         imageExtensions.enumerated().forEach {
             if $0.offset != 0 {
                 args.append("-o")
